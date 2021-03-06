@@ -1,2 +1,2 @@
 # cricket-docs
-A transitional repo for the generation of docs for cricket a common lisp noise library.
+A transitional repo for the generation of docs for Cricket--a Common Lisp coherent noise library.
