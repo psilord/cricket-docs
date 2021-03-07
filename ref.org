@@ -21,6 +21,8 @@ all docstrings.
 5. Ensure to save everything and commit all changed files, even images.
 #+END_COMMENT
 
+#+OPTIONS: toc:2
+
 * Cricket Introduction
 * Coherent Noise
 * API
