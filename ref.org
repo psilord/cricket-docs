@@ -361,27 +361,43 @@ Execute all code blocks in the buffer and update the results.
 Must usually
 
 * Org Mode Utilities
-The following utility is a post processor to convert the pathname output of
-C:WRITE-IMAGE which has then been flatted into a string by org mode--with
-the #P included, into a string of just the filename. This is a pure
-hack that suffices for this one use case. To support C-c C-v b for
-recomputing all images, we check path to ensure it is valid.
+The following utility is a post processor to convert the absolute pathname
+of C:WRITE-IMAGE which has been flatted into a string by org mode--with
+the #P and double quotes included(!), into a string of just the
+relative filename given the cwd of theemacs process.
+This is a pure hack that suffices for this one use case so I can develop
+these docs with a fast workflow.
 #+NAME: namestring
 #+BEGIN_SRC lisp :var path="" :results output :exports none
-;; The 'path' will be the STRING "#P/some/path/name" so I'll extracct out
-;; the portion I need as the file name. Used to post process ends of
-;; examples that have WRITE-IMAGE at the end.
-(format t "~A"
-        ;; TODO: convert to COND, make more precise in how it fails and what
-        ;; it accepts. Maybe make some more static images to indicate the
-        ;; failure condition.
-        (if (and path
-                 (vectorp path)
-                 (> (length path) 2)
-                 (string= (subseq path 0 2) "#P"))
-            (subseq (namestring path) 2)
-            "img/static/broken.png"))
+(block hack
+  (let* ((cwd (namestring (truename ".")))
+         (broken "./img/static/broken.png"))
+    (unless (and path (vectorp path) (>= (length path) 4))
+      (return-from hack broken))
+
+    ;; Attempt to clean up the path and remove the hamfisted
+    ;; bodge org-mode did.
+    (let* ((path (if (string= "#P\"" (subseq path 0 3))
+                     (subseq path 2 (1- (length path)))
+                     path)))
+
+      ;; First, check that the cwd is actually a prefix of the path. This
+      ;; increases the probability we're in the right cwd.
+      (unless (search cwd path)
+        (error "The path ~A is not a subpath of cwd ~A. cd to ~~/..../cricket-docs/"
+               path cwd))
+      (let ((rel-path
+              (if (pathname path)
+                  ;; strip off the #P"prefix and then the final " to leave
+                  ;; the path as a relative path wrt the cwd.
+                  ;; TODO: This means the cd of the emacs frame working on this
+                  ;; project MUST be cricket-docs/ for now. Ah well.
+                  (concatenate 'string "./"
+                               (subseq (namestring path)
+                                       ;; 1+ for the cwd's final /
+                                       (1+ (length cwd))))
+                  broken)))
+        (format t "~A" rel-path)))))
 #+END_SRC
 
 #+RESULTS: namestring
-: img/static/broken.png
