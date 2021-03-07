@@ -304,11 +304,11 @@ echo "Hello world"
 (in-package #:my-package) ;; <- doesn't affect repl!
 #+END_SRC
 
-#+BEGIN_SRC lisp :var arg="/tmp/proto-0.png" :post namestring(path=*this*) :results file drawer
+#+BEGIN_SRC lisp :var arg="/tmp/proto-0.png" :post namestring(path=*this*) :results file drawer :exports both
 (c:-> (c:checker-2d :seed "example")
   ;;(c:uniform-scale 1/4)
   (c:fractalize :fbm :octaves 3)
-  (c:make-map :width 128 :height 128)
+  (c:make-map :width 256 :height 256)
   (c:render-map)
   (c:write-image arg))
 #+END_SRC
@@ -320,12 +320,12 @@ echo "Hello world"
 
 Example text.
 
-#+BEGIN_SRC lisp :var arg="/tmp/proto-1.png" :post namestring(path=*this*) :results file drawer
+#+BEGIN_SRC lisp :var arg="/tmp/proto-1.png" :post namestring(path=*this*) :results file drawer :exports both
 (c:-> (c:perlin-3d :seed "example")
   (c:uniform-scale 1.5)
   (c:fractalize :fbm :frequency 1.3 :octaves 6 :lacunarity 3 :persistence 0.22)
   (c:turbulence (c:open-simplex-3d :seed "foo") :power 1.2 :roughness 4)
-  (c:make-map :width 128 :height 128)
+  (c:make-map :width 256 :height 256)
   (c:render-map :gradient :terrain)
   (c:write-image arg))
 #+END_SRC
@@ -337,7 +337,8 @@ Example text.
 
 Documentation retrival test:
 
-#+BEGIN_SRC lisp :results output
+The documentation string for PERLIN-2D is:
+#+BEGIN_SRC lisp :results output :exports results
 (format t "~A" (documentation #'c:perlin-2d 'function)))
 #+END_SRC
 
