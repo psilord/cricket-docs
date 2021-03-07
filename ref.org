@@ -367,7 +367,7 @@ the #P included, into a string of just the filename. This is a pure
 hack that suffices for this one use case. To support C-c C-v b for
 recomputing all images, we check path to ensure it is valid.
 #+NAME: namestring
-#+BEGIN_SRC lisp :var path="" :results output
+#+BEGIN_SRC lisp :var path="" :results output :exports none
 ;; The 'path' will be the STRING "#P/some/path/name" so I'll extracct out
 ;; the portion I need as the file name. Used to post process ends of
 ;; examples that have WRITE-IMAGE at the end.

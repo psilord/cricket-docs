@@ -1,86 +1,86 @@
-- [Cricket Introduction](#org65e2a72)
-- [Coherent Noise](#orge916185)
-- [API](#org1025850)
-  - [Generators](#org0aaa721)
-    - [Perlin](#orgb1bd702)
-    - [Simplex](#orgc8dbc35)
-    - [Open-Simplex](#orgbac99bb)
-    - [Value](#org9316394)
-    - [Cellular](#orga3d8f0a)
-    - [Cylinders](#org2226f76)
-    - [Spheres](#org8d1ffd2)
-    - [Checker](#orgdffb91f)
-    - [Constant](#orgb517a8b)
-    - [FBM: Fractal Brownian Motion](#orge2f3f09)
-    - [Billow](#orgcab5257)
-    - [Multifractal](#orgac72643)
-    - [Hybrid-Multifractal](#org236da07)
-    - [Ridged-Multifractal](#org869db2d)
-  - [Modifiers](#orgc53f7ec)
-    - [+](#orgf218ca4)
-    - [-](#org7d66c0e)
-    - [\*](#org6a2177e)
-    - [/](#org58e003b)
-    - [abs](#orgda3d6fb)
-    - [blend](#org8ff3388)
-    - [cache](#org62921c1)
-    - [clamp](#org88019cd)
-    - [curve](#orgf334633)
-    - [displace](#org9dde60d)
-    - [expt](#org3b32cac)
-    - [fractalize](#org376b8ea)
-    - [max](#orged7b26e)
-    - [negate](#org79de906)
-    - [power](#orgfb6d1d7)
-    - [rotate](#org1526830)
-    - [scale](#org6523046)
-    - [select](#orgd53b79b)
-    - [strengthen](#orga3be9c5)
-    - [terrace](#org641dfb7)
-    - [translate](#org40625d7)
-    - [turbulance](#org36823a9)
-    - [uniform-scale](#orgf417611)
-  - [Map](#org8928c8c)
-    - [define-gradient](#org7b9fab9)
-    - [get-image-pixel](#org11c7118)
-    - [image](#org01369b3)
-    - [make-map](#orga4d91a1)
-    - [render-map](#org70c2fe6)
-    - [write-image](#org6fdcd7f)
-- [Glossary](#orge4f5947)
-- [References](#org29fb856)
-- [Prototyping](#orge8320f2)
-  - [Org Mode Code Block Examples](#orgde68133)
-  - [Org Mode Wisdom](#org735796a)
-    - [<https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf>](#org2909681)
-    - [<https://orgmode.org/worg/orgcard.html>](#orgada089b)
-    - [<https://orgmode.org/manual/Variable-Index.html>](#orgd0364b7)
-    - [C-c C-x C-v - org-toggle-inline-images](#org9c3f813)
-    - [C-c C-v b - org-babel-execute-buffer.](#org36b9ef8)
-- [Org Mode Utilities](#orgbcc6c45)
+- [Cricket Introduction](#orgd7b07f9)
+- [Coherent Noise](#orgd4c5b92)
+- [API](#orgd9b4d60)
+  - [Generators](#orgfffec48)
+    - [Perlin](#orgedbf255)
+    - [Simplex](#orga7fd0e4)
+    - [Open-Simplex](#orgb4f905c)
+    - [Value](#org8a6b376)
+    - [Cellular](#org7bb725e)
+    - [Cylinders](#org86b3206)
+    - [Spheres](#org40e5bee)
+    - [Checker](#org3408896)
+    - [Constant](#org9a8cf9e)
+    - [FBM: Fractal Brownian Motion](#org3caf3dd)
+    - [Billow](#orgffb7256)
+    - [Multifractal](#orgd82e26e)
+    - [Hybrid-Multifractal](#orge5db75b)
+    - [Ridged-Multifractal](#org1f5bbae)
+  - [Modifiers](#org91a287e)
+    - [+](#orgb2c792c)
+    - [-](#orgeef0529)
+    - [\*](#orgb454ec2)
+    - [/](#orgd8bd30f)
+    - [abs](#org1967256)
+    - [blend](#org99cc429)
+    - [cache](#org1936e64)
+    - [clamp](#orgcc80b53)
+    - [curve](#org8aac9ce)
+    - [displace](#orgd34fd06)
+    - [expt](#org939e67e)
+    - [fractalize](#org712be18)
+    - [max](#org7d56d87)
+    - [negate](#orgc102639)
+    - [power](#org7ab761a)
+    - [rotate](#org42c7d48)
+    - [scale](#org84c59ff)
+    - [select](#org3b0b1f5)
+    - [strengthen](#org7a3cea7)
+    - [terrace](#orgbc8421e)
+    - [translate](#orgf087c35)
+    - [turbulance](#orgabf43cb)
+    - [uniform-scale](#orgf9e8102)
+  - [Map](#orgc01e49d)
+    - [define-gradient](#orgc867aa1)
+    - [get-image-pixel](#orgd79e73c)
+    - [image](#orga4a00d5)
+    - [make-map](#org97584ee)
+    - [render-map](#org9b1c019)
+    - [write-image](#orgc1532d6)
+- [Glossary](#orgf429d15)
+- [References](#org267e9f1)
+- [Prototyping](#orgd461670)
+  - [Org Mode Code Block Examples](#org3e70971)
+  - [Org Mode Wisdom](#orgb399f88)
+    - [<https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf>](#orgbac2604)
+    - [<https://orgmode.org/worg/orgcard.html>](#org55b10a2)
+    - [<https://orgmode.org/manual/Variable-Index.html>](#org7c0776c)
+    - [C-c C-x C-v - org-toggle-inline-images](#org732e4c9)
+    - [C-c C-v b - org-babel-execute-buffer.](#org7ce34ab)
+- [Org Mode Utilities](#org007483d)
 
 
-<a id="org65e2a72"></a>
+<a id="orgd7b07f9"></a>
 
 # Cricket Introduction
 
 
-<a id="orge916185"></a>
+<a id="orgd4c5b92"></a>
 
 # Coherent Noise
 
 
-<a id="org1025850"></a>
+<a id="orgd9b4d60"></a>
 
 # API
 
 
-<a id="org0aaa721"></a>
+<a id="orgfffec48"></a>
 
 ## Generators
 
 
-<a id="orgb1bd702"></a>
+<a id="orgedbf255"></a>
 
 ### Perlin
 
@@ -117,7 +117,7 @@
     3.  Example
 
 
-<a id="orgc8dbc35"></a>
+<a id="orga7fd0e4"></a>
 
 ### Simplex
 
@@ -154,7 +154,7 @@
     3.  Example
 
 
-<a id="orgbac99bb"></a>
+<a id="orgb4f905c"></a>
 
 ### Open-Simplex
 
@@ -231,7 +231,7 @@
     3.  Example
 
 
-<a id="org9316394"></a>
+<a id="org8a6b376"></a>
 
 ### Value
 
@@ -252,7 +252,7 @@
     3.  Example
 
 
-<a id="orga3d8f0a"></a>
+<a id="org7bb725e"></a>
 
 ### Cellular
 
@@ -273,7 +273,7 @@
     3.  Example
 
 
-<a id="org2226f76"></a>
+<a id="org86b3206"></a>
 
 ### Cylinders
 
@@ -286,7 +286,7 @@
     3.  Example
 
 
-<a id="org8d1ffd2"></a>
+<a id="org40e5bee"></a>
 
 ### Spheres
 
@@ -299,7 +299,7 @@
     3.  Example
 
 
-<a id="orgdffb91f"></a>
+<a id="org3408896"></a>
 
 ### Checker
 
@@ -312,7 +312,7 @@
     3.  Example
 
 
-<a id="orgb517a8b"></a>
+<a id="org9a8cf9e"></a>
 
 ### Constant
 
@@ -325,7 +325,7 @@
     3.  Example
 
 
-<a id="orge2f3f09"></a>
+<a id="org3caf3dd"></a>
 
 ### FBM: Fractal Brownian Motion
 
@@ -354,7 +354,7 @@
     3.  Example
 
 
-<a id="orgcab5257"></a>
+<a id="orgffb7256"></a>
 
 ### Billow
 
@@ -383,7 +383,7 @@
     3.  Example
 
 
-<a id="orgac72643"></a>
+<a id="orgd82e26e"></a>
 
 ### Multifractal
 
@@ -412,7 +412,7 @@
     3.  Example
 
 
-<a id="org236da07"></a>
+<a id="orge5db75b"></a>
 
 ### Hybrid-Multifractal
 
@@ -441,7 +441,7 @@
     3.  Example
 
 
-<a id="org869db2d"></a>
+<a id="org1f5bbae"></a>
 
 ### Ridged-Multifractal
 
@@ -470,12 +470,12 @@
     3.  Example
 
 
-<a id="orgc53f7ec"></a>
+<a id="org91a287e"></a>
 
 ## Modifiers
 
 
-<a id="orgf218ca4"></a>
+<a id="orgb2c792c"></a>
 
 ### +
 
@@ -486,7 +486,7 @@
 3.  Example
 
 
-<a id="org7d66c0e"></a>
+<a id="orgeef0529"></a>
 
 ### -
 
@@ -497,7 +497,7 @@
 3.  Example
 
 
-<a id="org6a2177e"></a>
+<a id="orgb454ec2"></a>
 
 ### \*
 
@@ -508,7 +508,7 @@
 3.  Example
 
 
-<a id="org58e003b"></a>
+<a id="orgd8bd30f"></a>
 
 ### /
 
@@ -519,7 +519,7 @@
 3.  Example
 
 
-<a id="orgda3d6fb"></a>
+<a id="org1967256"></a>
 
 ### abs
 
@@ -530,7 +530,7 @@
 3.  Example
 
 
-<a id="org8ff3388"></a>
+<a id="org99cc429"></a>
 
 ### blend
 
@@ -541,7 +541,7 @@
 3.  Example
 
 
-<a id="org62921c1"></a>
+<a id="org1936e64"></a>
 
 ### cache
 
@@ -552,7 +552,7 @@
 3.  Example
 
 
-<a id="org88019cd"></a>
+<a id="orgcc80b53"></a>
 
 ### clamp
 
@@ -563,7 +563,7 @@
 3.  Example
 
 
-<a id="orgf334633"></a>
+<a id="org8aac9ce"></a>
 
 ### curve
 
@@ -574,7 +574,7 @@
 3.  Example
 
 
-<a id="org9dde60d"></a>
+<a id="orgd34fd06"></a>
 
 ### displace
 
@@ -585,7 +585,7 @@
 3.  Example
 
 
-<a id="org3b32cac"></a>
+<a id="org939e67e"></a>
 
 ### expt
 
@@ -596,7 +596,7 @@
 3.  Example
 
 
-<a id="org376b8ea"></a>
+<a id="org712be18"></a>
 
 ### fractalize
 
@@ -607,7 +607,7 @@
 3.  Example
 
 
-<a id="orged7b26e"></a>
+<a id="org7d56d87"></a>
 
 ### max
 
@@ -618,7 +618,7 @@
 3.  Example
 
 
-<a id="org79de906"></a>
+<a id="orgc102639"></a>
 
 ### negate
 
@@ -629,7 +629,7 @@
 3.  Example
 
 
-<a id="orgfb6d1d7"></a>
+<a id="org7ab761a"></a>
 
 ### power
 
@@ -640,7 +640,7 @@
 3.  Example
 
 
-<a id="org1526830"></a>
+<a id="org42c7d48"></a>
 
 ### rotate
 
@@ -651,7 +651,7 @@
 3.  Example
 
 
-<a id="org6523046"></a>
+<a id="org84c59ff"></a>
 
 ### scale
 
@@ -662,7 +662,7 @@
 3.  Example
 
 
-<a id="orgd53b79b"></a>
+<a id="org3b0b1f5"></a>
 
 ### select
 
@@ -673,7 +673,7 @@
 3.  Example
 
 
-<a id="orga3be9c5"></a>
+<a id="org7a3cea7"></a>
 
 ### strengthen
 
@@ -684,7 +684,7 @@
 3.  Example
 
 
-<a id="org641dfb7"></a>
+<a id="orgbc8421e"></a>
 
 ### terrace
 
@@ -695,7 +695,7 @@
 3.  Example
 
 
-<a id="org40625d7"></a>
+<a id="orgf087c35"></a>
 
 ### translate
 
@@ -706,7 +706,7 @@
 3.  Example
 
 
-<a id="org36823a9"></a>
+<a id="orgabf43cb"></a>
 
 ### turbulance
 
@@ -717,7 +717,7 @@
 3.  Example
 
 
-<a id="orgf417611"></a>
+<a id="orgf9e8102"></a>
 
 ### uniform-scale
 
@@ -728,22 +728,22 @@
 3.  Example
 
 
-<a id="org8928c8c"></a>
+<a id="orgc01e49d"></a>
 
 ## Map
 
 
-<a id="org7b9fab9"></a>
+<a id="orgc867aa1"></a>
 
 ### define-gradient
 
 
-<a id="org11c7118"></a>
+<a id="orgd79e73c"></a>
 
 ### get-image-pixel
 
 
-<a id="org01369b3"></a>
+<a id="orga4a00d5"></a>
 
 ### image
 
@@ -754,7 +754,7 @@
 3.  image-data
 
 
-<a id="orga4d91a1"></a>
+<a id="org97584ee"></a>
 
 ### make-map
 
@@ -767,34 +767,34 @@
 4.  map-width
 
 
-<a id="org70c2fe6"></a>
+<a id="org9b1c019"></a>
 
 ### render-map
 
 
-<a id="org6fdcd7f"></a>
+<a id="orgc1532d6"></a>
 
 ### write-image
 
 
-<a id="orge4f5947"></a>
+<a id="orgf429d15"></a>
 
 # Glossary
 
 
-<a id="org29fb856"></a>
+<a id="org267e9f1"></a>
 
 # References
 
 
-<a id="orge8320f2"></a>
+<a id="orgd461670"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="orgde68133"></a>
+<a id="org3e70971"></a>
 
 ## Org Mode Code Block Examples
 
@@ -849,58 +849,42 @@ The documentation string for PERLIN-2D is:
     the noise (optional, default: NIL).
 
 
-<a id="org735796a"></a>
+<a id="orgb399f88"></a>
 
 ## Org Mode Wisdom
 
 
-<a id="org2909681"></a>
+<a id="orgbac2604"></a>
 
 ### <https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf>
 
 
-<a id="orgada089b"></a>
+<a id="org55b10a2"></a>
 
 ### <https://orgmode.org/worg/orgcard.html>
 
 
-<a id="orgd0364b7"></a>
+<a id="org7c0776c"></a>
 
 ### <https://orgmode.org/manual/Variable-Index.html>
 
 
-<a id="org9c3f813"></a>
+<a id="org732e4c9"></a>
 
 ### C-c C-x C-v - org-toggle-inline-images
 
 Used to toggle all inline images on and off.
 
 
-<a id="org36b9ef8"></a>
+<a id="org7ce34ab"></a>
 
 ### C-c C-v b - org-babel-execute-buffer.
 
 Execute all code blocks in the buffer and update the results. Must usually
 
 
-<a id="orgbcc6c45"></a>
+<a id="org007483d"></a>
 
 # Org Mode Utilities
 
 The following utility is a post processor to convert the pathname output of C:WRITE-IMAGE which has then been flatted into a string by org mode&#x2013;with the #P included, into a string of just the filename. This is a pure hack that suffices for this one use case. To support C-c C-v b for recomputing all images, we check path to ensure it is valid.
-
-```lisp
-;; The 'path' will be the STRING "#P/some/path/name" so I'll extracct out
-;; the portion I need as the file name. Used to post process ends of
-;; examples that have WRITE-IMAGE at the end.
-(format t "~A"
-        ;; TODO: convert to COND, make more precise in how it fails and what
-        ;; it accepts. Maybe make some more static images to indicate the
-        ;; failure condition.
-        (if (and path
-                 (vectorp path)
-                 (> (length path) 2)
-                 (string= (subseq path 0 2) "#P"))
-            (subseq (namestring path) 2)
-            "img/static/broken.png"))
-```
