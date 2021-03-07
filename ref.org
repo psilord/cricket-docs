@@ -335,6 +335,20 @@ Example text.
 [[file:/tmp/proto-1.png]]
 :end:
 
+Documentation retrival test:
+
+#+BEGIN_SRC lisp :results output
+(format t "~A" (documentation #'c:perlin-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 2-dimensional Perlin Improved noise values
+: ranging from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ** Org Mode Wisdom
 *** [[https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf]]
 *** [[https://orgmode.org/worg/orgcard.html]]
