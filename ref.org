@@ -304,14 +304,13 @@ echo "Hello world"
 (in-package #:my-package) ;; <- doesn't affect repl!
 #+END_SRC
 
-#+BEGIN_SRC lisp :results file drawer :var arg="/tmp/proto-0.png"
-(C:-> (c:checker-2d :seed "example")
+#+BEGIN_SRC lisp :var arg="/tmp/proto-0.png" :post namestring(path=*this*) :results file drawer
+(c:-> (c:checker-2d :seed "example")
   ;;(c:uniform-scale 1/4)
   (c:fractalize :fbm :octaves 3)
   (c:make-map :width 128 :height 128)
   (c:render-map)
-  (c:write-image arg)
-  (namestring))
+  (c:write-image arg))
 #+END_SRC
 
 #+RESULTS:
@@ -358,7 +357,13 @@ recomputing all images, we check path to ensure it is valid.
 ;; the portion I need as the file name. Used to post process ends of
 ;; examples that have WRITE-IMAGE at the end.
 (format t "~A"
-        (if (and path (vectorp path) (plusp (length path)))
+        ;; TODO: convert to COND, make more precise in how it fails and what
+        ;; it accepts. Maybe make some more static images to indicate the
+        ;; failure condition.
+        (if (and path
+                 (vectorp path)
+                 (> (length path) 2)
+                 (string= (subseq path 0 2) "#P"))
             (subseq (namestring path) 2)
             "img/static/broken.png"))
 #+END_SRC
