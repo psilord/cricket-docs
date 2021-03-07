@@ -362,7 +362,7 @@ Example text.
 
 Documentation retrival test:
 
-The documentation string for PERLIN-2D is:
+*(perlin-2d &key seed)*
 #+BEGIN_SRC lisp :results output :exports results
 (format t "~A" (documentation #'c:perlin-2d 'function)))
 #+END_SRC
@@ -411,17 +411,20 @@ these docs with a fast workflow.
       (unless (search cwd path)
         (error "The path ~A is not a subpath of cwd ~A. cd to ~~/..../cricket-docs/"
                path cwd))
-      (let ((rel-path
-              (if (pathname path)
-                  ;; strip off the #P"prefix and then the final " to leave
-                  ;; the path as a relative path wrt the cwd.
-                  ;; TODO: This means the cd of the emacs frame working on this
-                  ;; project MUST be cricket-docs/ for now. Ah well.
-                  (concatenate 'string "./"
-                               (subseq (namestring path)
-                                       ;; 1+ for the cwd's final /
-                                       (1+ (length cwd))))
-                  broken)))
+      (let* ((rel-path
+               ;; strip off the #P"prefix and then the final " to leave
+               ;; the path as a relative path wrt the cwd.
+               ;; TODO: This means the cd of the emacs frame working on this
+               ;; project MUST be cricket-docs/ for now. Ah well.
+               (concatenate 'string "./"
+                            (subseq (namestring path)
+                                    ;; 1+ for the cwd's final /
+                                    (1+ (length cwd)))))
+             ;; Check to make sure it is actually valid.
+             (rel-path (if (probe-file rel-path)
+                           rel-path
+                           broken)))
+        ;; Finally dump to stdout.
         (format t "~A" rel-path)))))
 #+END_SRC
 

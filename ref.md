@@ -1,34 +1,34 @@
-- [Cricket Introduction](#org1963272)
-- [Coherent Noise](#orgf180c9f)
-- [API](#org47409f7)
-  - [Generators](#orga70be31)
-  - [Modifiers](#orgbe3b6d3)
-  - [Map](#org6eef137)
-- [Glossary](#org2b2cf23)
-- [References](#org49512d2)
-- [Prototyping](#org168c347)
-  - [Org Mode Code Block Examples](#org139ea14)
-  - [Org Mode Wisdom](#orge716e43)
-- [Org Mode Utilities](#org152c64f)
+- [Cricket Introduction](#org23afd07)
+- [Coherent Noise](#orgf307d8e)
+- [API](#org399c985)
+  - [Generators](#org888a7d0)
+  - [Modifiers](#orge2761a0)
+  - [Map](#org7c6bea3)
+- [Glossary](#org9ee3f3f)
+- [References](#orgb9b97d9)
+- [Prototyping](#org9007d57)
+  - [Org Mode Code Block Examples](#orga96f416)
+  - [Org Mode Wisdom](#orgef33d2e)
+- [Org Mode Utilities](#org29cfd6d)
 
 
 
-<a id="org1963272"></a>
+<a id="org23afd07"></a>
 
 # Cricket Introduction
 
 
-<a id="orgf180c9f"></a>
+<a id="orgf307d8e"></a>
 
 # Coherent Noise
 
 
-<a id="org47409f7"></a>
+<a id="org399c985"></a>
 
 # API
 
 
-<a id="orga70be31"></a>
+<a id="org888a7d0"></a>
 
 ## Generators
 
@@ -395,7 +395,7 @@
     3.  Example
 
 
-<a id="orgbe3b6d3"></a>
+<a id="orge2761a0"></a>
 
 ## Modifiers
 
@@ -607,7 +607,7 @@
 3.  Example
 
 
-<a id="org6eef137"></a>
+<a id="org7c6bea3"></a>
 
 ## Map
 
@@ -644,24 +644,24 @@
 ### write-image
 
 
-<a id="org2b2cf23"></a>
+<a id="org9ee3f3f"></a>
 
 # Glossary
 
 
-<a id="org49512d2"></a>
+<a id="orgb9b97d9"></a>
 
 # References
 
 
-<a id="org168c347"></a>
+<a id="org9007d57"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org139ea14"></a>
+<a id="orga96f416"></a>
 
 ## Org Mode Code Block Examples
 
@@ -706,7 +706,7 @@ Example text.
 
 Documentation retrival test:
 
-The documentation string for PERLIN-2D is:
+**(perlin-2d &key seed)**
 
     Construct a sampler that, when sampled, outputs 2-dimensional Perlin Improved noise values
     ranging from -1.0 to 1.0.
@@ -716,7 +716,7 @@ The documentation string for PERLIN-2D is:
     the noise (optional, default: NIL).
 
 
-<a id="orge716e43"></a>
+<a id="orgef33d2e"></a>
 
 ## Org Mode Wisdom
 
@@ -740,7 +740,7 @@ Used to toggle all inline images on and off.
 Execute all code blocks in the buffer and update the results. Must usually
 
 
-<a id="org152c64f"></a>
+<a id="org29cfd6d"></a>
 
 # Org Mode Utilities
 
