@@ -1,3 +1,26 @@
+#+BEGIN_COMMENT
+Constraints:
+1. The frame in which you're editing must have its cwd be the toplevel of
+the document directory. This is so image generation is linked correctly into
+the org document.
+
+2. You must have an sbcl repl running with the right stuff loaded into it
+and in the right package. To configure the repl:
+
+(ql:quickload :cricket)
+(defpackage #:my-package
+(:local-nicknames (#:c #:cricket))
+(:use #:cl))
+(in-package #:my-package)
+
+3. C-c C-v b will rebuild the whole of the document and all images and
+all docstrings.
+
+4. C-c C-e g g will emit a github style markdown.
+
+5. Ensure to save everything and commit all changed files, even images.
+#+END_COMMENT
+
 * Cricket Introduction
 * Coherent Noise
 * API
