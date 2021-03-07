@@ -315,7 +315,7 @@ echo "Hello world"
 
 #+RESULTS:
 :results:
-[[file:/home/psilord/quicklisp/local-projects/cricket-docs/img/proto/proto-0.png]]
+[[file:./img/proto/proto-0.png]]
 :end:
 
 Example text.
@@ -332,7 +332,7 @@ Example text.
 
 #+RESULTS:
 :results:
-[[file:/home/psilord/quicklisp/local-projects/cricket-docs/img/proto/proto-1.png]]
+[[file:./img/proto/proto-1.png]]
 :end:
 
 Documentation retrival test:
