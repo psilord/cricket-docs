@@ -24,6 +24,8 @@ all docstrings.
 #+OPTIONS: toc:2
 
 * Cricket Introduction
+This document describes the ~cricket~ coherent noise library. It is in the
+process of being written.
 * Coherent Noise
 * API
 ** Generators

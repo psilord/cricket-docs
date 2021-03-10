@@ -1,33 +1,35 @@
-- [Cricket Introduction](#orge93d056)
-- [Coherent Noise](#orgb9f7ff7)
-- [API](#org30d0e1c)
-  - [Generators](#orgc7c922d)
-  - [Modifiers](#org863e066)
-  - [Map](#org110ccc5)
-- [Glossary](#org079ecc1)
-- [References](#org21281ab)
-- [Prototyping](#org3fd2bb4)
-  - [Org Mode Code Block Examples](#org068f05a)
-  - [Org Mode Wisdom](#org64fcdf3)
+- [Cricket Introduction](#org8ae4dd3)
+- [Coherent Noise](#orgbd4ff32)
+- [API](#orgcd6aa6b)
+  - [Generators](#org193e149)
+  - [Modifiers](#orgc1337ee)
+  - [Map](#orgc40861a)
+- [Glossary](#org148c316)
+- [References](#orgafa820c)
+- [Prototyping](#org40b1114)
+  - [Org Mode Code Block Examples](#org455bc16)
+  - [Org Mode Wisdom](#org04378ba)
 
 
 
-<a id="orge93d056"></a>
+<a id="org8ae4dd3"></a>
 
 # Cricket Introduction
 
+This document describes the `cricket` coherent noise library. It is in the process of being written.
 
-<a id="orgb9f7ff7"></a>
+
+<a id="orgbd4ff32"></a>
 
 # Coherent Noise
 
 
-<a id="org30d0e1c"></a>
+<a id="orgcd6aa6b"></a>
 
 # API
 
 
-<a id="orgc7c922d"></a>
+<a id="org193e149"></a>
 
 ## Generators
 
@@ -558,7 +560,7 @@
 3.  ridged-multifractal-4d
 
 
-<a id="org863e066"></a>
+<a id="orgc1337ee"></a>
 
 ## Modifiers
 
@@ -632,7 +634,7 @@
 ### uniform-scale
 
 
-<a id="org110ccc5"></a>
+<a id="orgc40861a"></a>
 
 ## Map
 
@@ -669,24 +671,24 @@
 ### write-image
 
 
-<a id="org079ecc1"></a>
+<a id="org148c316"></a>
 
 # Glossary
 
 
-<a id="org21281ab"></a>
+<a id="orgafa820c"></a>
 
 # References
 
 
-<a id="org3fd2bb4"></a>
+<a id="org40b1114"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org068f05a"></a>
+<a id="org455bc16"></a>
 
 ## Org Mode Code Block Examples
 
@@ -741,7 +743,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org64fcdf3"></a>
+<a id="org04378ba"></a>
 
 ## Org Mode Wisdom
 
