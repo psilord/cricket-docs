@@ -1,35 +1,35 @@
-- [Cricket Introduction](#org17ecf5a)
-- [Coherent Noise](#orga3c9820)
-- [API](#org79102e5)
-  - [Generators](#org229f23a)
-  - [Modifiers](#org43464db)
-  - [Map](#org894a396)
-- [Glossary](#org0a0f1c2)
-- [References](#orgb3fdac1)
-- [Prototyping](#orgf505335)
-  - [Org Mode Code Block Examples](#org2834811)
-  - [Org Mode Wisdom](#orga5169bb)
+- [Cricket Introduction](#orgb8d2376)
+- [Coherent Noise](#org44adc6a)
+- [API](#orgc35fa44)
+  - [Generators](#orgd4b0433)
+  - [Modifiers](#org7186e6a)
+  - [Map](#org09f470f)
+- [Glossary](#org4f55fc9)
+- [References](#org504c3e9)
+- [Prototyping](#orgcbc8626)
+  - [Org Mode Code Block Examples](#org7117c55)
+  - [Org Mode Wisdom](#orgf9b5abb)
 
 
 
-<a id="org17ecf5a"></a>
+<a id="orgb8d2376"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="orga3c9820"></a>
+<a id="org44adc6a"></a>
 
 # Coherent Noise
 
 
-<a id="org79102e5"></a>
+<a id="orgc35fa44"></a>
 
 # API
 
 
-<a id="org229f23a"></a>
+<a id="orgd4b0433"></a>
 
 ## Generators
 
@@ -207,7 +207,10 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
         TBD
 
-4.  Function: **(open-simplex2f-2d &key seed (orientation :standard))**
+
+### Open-Simplex 2F
+
+1.  Function: **(open-simplex2f-2d &key seed (orientation :standard))**
 
     1.  Description
 
@@ -226,7 +229,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
         TBD
 
-5.  Function: **(open-simplex2f-3d &key seed (orientation :standard))**
+2.  Function: **(open-simplex2f-3d &key seed (orientation :standard))**
 
     1.  Description
 
@@ -245,7 +248,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
         TBD
 
-6.  Function: **(open-simplex2f-4d &key seed (orientation :standard))**
+3.  Function: **(open-simplex2f-4d &key seed (orientation :standard))**
 
     1.  Description
 
@@ -265,7 +268,10 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
         TBD
 
-7.  Function: **(open-simplex2s-2d &key seed (orientation :standard))**
+
+### Open-Simplex 2S
+
+1.  Function: **(open-simplex2s-2d &key seed (orientation :standard))**
 
     1.  Description
 
@@ -284,7 +290,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
         TBD
 
-8.  Function: **(open-simplex2s-3d &key seed (orientation :standard))**
+2.  Function: **(open-simplex2s-3d &key seed (orientation :standard))**
 
     1.  Description
 
@@ -303,7 +309,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
         TBD
 
-9.  Function: **(open-simplex2s-4d &key seed (orientation :standard))**
+3.  Function: **(open-simplex2s-4d &key seed (orientation :standard))**
 
     1.  Description
 
@@ -792,7 +798,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 3.  ridged-multifractal-4d
 
 
-<a id="org43464db"></a>
+<a id="org7186e6a"></a>
 
 ## Modifiers
 
@@ -866,7 +872,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### uniform-scale
 
 
-<a id="org894a396"></a>
+<a id="org09f470f"></a>
 
 ## Map
 
@@ -903,24 +909,24 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### write-image
 
 
-<a id="org0a0f1c2"></a>
+<a id="org4f55fc9"></a>
 
 # Glossary
 
 
-<a id="orgb3fdac1"></a>
+<a id="org504c3e9"></a>
 
 # References
 
 
-<a id="orgf505335"></a>
+<a id="orgcbc8626"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org2834811"></a>
+<a id="org7117c55"></a>
 
 ## Org Mode Code Block Examples
 
@@ -975,7 +981,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orga5169bb"></a>
+<a id="orgf9b5abb"></a>
 
 ## Org Mode Wisdom
 
