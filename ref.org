@@ -711,9 +711,108 @@ octaves (optional, default 0.5).
 ***** Example
 TBD
 *** Multifractal
-**** multifractal-2d
-**** multifractal-3d
-**** multifractal-4d
+**** Function: (*multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:multifractal-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+2-dimensional multifractal noise, using the supplied `generator` function to construct each octave's
+sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-2d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 0.5).
+#+end_example
+
+***** Example
+TBD
+**** Function: (*multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:multifractal-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+3-dimensional multifractal noise, using the supplied `generator` function to construct each octave's
+sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-3d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 0.5).
+#+end_example
+
+***** Example
+TBD
+**** Function: (*multifractal-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:multifractal-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+4-dimensional multifractal noise, using the supplied `generator` function to construct each octave's
+sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-4d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 0.5).
+#+end_example
+
+***** Example
+TBD
 *** Hybrid-Multifractal
 **** hybrid-multifractal-2d
 **** hybrid-multifractal-3d

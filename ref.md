@@ -1,35 +1,35 @@
-- [Cricket Introduction](#orgf6fd26b)
-- [Coherent Noise](#org9645db3)
-- [API](#org912138b)
-  - [Generators](#org374d4af)
-  - [Modifiers](#orgb4df79c)
-  - [Map](#org5409f1a)
-- [Glossary](#orge881d5b)
-- [References](#orgb640a7b)
-- [Prototyping](#orgf8632ff)
-  - [Org Mode Code Block Examples](#orga0ee737)
-  - [Org Mode Wisdom](#org8755132)
+- [Cricket Introduction](#org17ecf5a)
+- [Coherent Noise](#orga3c9820)
+- [API](#org79102e5)
+  - [Generators](#org229f23a)
+  - [Modifiers](#org43464db)
+  - [Map](#org894a396)
+- [Glossary](#org0a0f1c2)
+- [References](#orgb3fdac1)
+- [Prototyping](#orgf505335)
+  - [Org Mode Code Block Examples](#org2834811)
+  - [Org Mode Wisdom](#orga5169bb)
 
 
 
-<a id="orgf6fd26b"></a>
+<a id="org17ecf5a"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org9645db3"></a>
+<a id="orga3c9820"></a>
 
 # Coherent Noise
 
 
-<a id="org912138b"></a>
+<a id="org79102e5"></a>
 
 # API
 
 
-<a id="org374d4af"></a>
+<a id="org229f23a"></a>
 
 ## Generators
 
@@ -680,11 +680,98 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
 ### Multifractal
 
-1.  multifractal-2d
+1.  Function: (**multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
 
-2.  multifractal-3d
+    1.  Description
 
-3.  multifractal-4d
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            2-dimensional multifractal noise, using the supplied `generator` function to construct each octave's
+            sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-2d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
+
+2.  Function: (**multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            3-dimensional multifractal noise, using the supplied `generator` function to construct each octave's
+            sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-3d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
+
+3.  Function: (**multifractal-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            4-dimensional multifractal noise, using the supplied `generator` function to construct each octave's
+            sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-4d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
 
 
 ### Hybrid-Multifractal
@@ -705,7 +792,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 3.  ridged-multifractal-4d
 
 
-<a id="orgb4df79c"></a>
+<a id="org43464db"></a>
 
 ## Modifiers
 
@@ -779,7 +866,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### uniform-scale
 
 
-<a id="org5409f1a"></a>
+<a id="org894a396"></a>
 
 ## Map
 
@@ -816,24 +903,24 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### write-image
 
 
-<a id="orge881d5b"></a>
+<a id="org0a0f1c2"></a>
 
 # Glossary
 
 
-<a id="orgb640a7b"></a>
+<a id="orgb3fdac1"></a>
 
 # References
 
 
-<a id="orgf8632ff"></a>
+<a id="orgf505335"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="orga0ee737"></a>
+<a id="org2834811"></a>
 
 ## Org Mode Code Block Examples
 
@@ -888,7 +975,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org8755132"></a>
+<a id="orga5169bb"></a>
 
 ## Org Mode Wisdom
 
