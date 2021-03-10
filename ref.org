@@ -158,238 +158,246 @@ TBD
 ***** Example
 TBD
 *** Open-Simplex
-**** open-simplex-2d
-***** Parameter List
+**** Function: *(open-simplex-2d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 2-dimensional OpenSimplex noise values ranging
+: from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** open-simplex-3d
-***** Parameter List
+TBD
+**** Function: *(open-simplex-3d *key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 3-dimensional OpenSimplex noise values ranging
+: from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** open-simplex-4d
-***** Parameter List
+TBD
+**** Function: *(open-simplex-4d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 4-dimensional OpenSimplex noise values ranging
+: from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** open-simplex2f-2d
-***** Parameter List
+TBD
+**** Function: *(open-simplex2f-2d &key seed (orientation :standard))*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex2f-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 2-dimensional OpenSimplex2F noise values ranging
+from -1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`orientation`: One of `:standard` or `:x/y`, denoting the orientation of the lattice. `:x/y` has the
+Y axis pointing down the main diagonal, which might be more suitable for a game where Y is
+vertical (optional, default: `:standard`).
+#+end_example
+
 ***** Example
-**** open-simplex2f-3d
-***** Parameter List
+TBD
+**** Function: *(open-simplex2f-3d &key seed (orientation :standard))*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex2f-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 3-dimensional OpenSimplex2F noise values ranging
+from -1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`orientation`: One of `:standard`, `:xy/z`, or `:xz/y`, denoting the orientation of the lattice.
+`:xy/z` has better visual isotropy in XY, and `:xz/y` has better visual isotropy in XZ (optional,
+default: `:standard`).
+#+end_example
+
 ***** Example
-**** open-simplex2f-4d
-***** Parameter List
+TBD
+**** Function: *(open-simplex2f-4d &key seed (orientation :standard))*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex2f-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 4-dimensional OpenSimplex2F noise values ranging
+from -1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`orientation`: One of `:standard`, `:xy/zw`, `:xz/yw`, or `:xyz/w`, denoting the orientation of the
+lattice. `:xy/zw` is recommended for 3D terrain where X/Y or Z/W are horizontal. `:xz/yw` is
+recommended for 3D terrain where X/Z or Y/W are horizontal. `:xyz/w` is recommended for time-varied
+animations of 3D objects, where W is time (optional, default: `:standard`).
+#+end_example
+
 ***** Example
-**** open-simplex2s-2d
-***** Parameter List
+TBD
+**** Function: *(open-simplex2s-2d &key seed (orientation :standard))*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex2s-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 2-dimensional OpenSimplex2S noise values ranging
+from -1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`orientation`: One of `:standard` or `:x/y`, denoting the orientation of the lattice. `:x/y` has the
+Y axis pointing down the main diagonal, which might be more suitable for a game where Y is
+vertical (optional, default: `:standard`).
+#+end_example
+
 ***** Example
-**** open-simplex2s-3d
-***** Parameter List
+TBD
+**** Function: *(open-simplex2s-3d &key seed (orientation :standard))*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex2s-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 3-dimensional OpenSimplex2S noise values ranging
+from -1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`orientation`: One of `:standard`, `:xy/z`, or `:xz/y`, denoting the orientation of the lattice.
+`:xy/z` has better visual isotropy in XY, and `:xz/y` has better visual isotropy in XZ (optional,
+default: `:standard`).
+#+end_example
+
 ***** Example
-**** open-simplex2s-4d
-***** Parameter List
+TBD
+**** Function: *(open-simplex2s-4d &key seed (orientation :standard))*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:open-simplex2s-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 4-dimensional OpenSimplex2S noise values ranging
+from -1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`orientation`: One of `:standard`, `:xy/zw`, `:xz/yw`, or `:xyz/w`, denoting the orientation of the
+lattice. `:xy/zw` is recommended for 3D terrain where X/Y or Z/W are horizontal. `:xz/yw` is
+recommended for 3D terrain where X/Z or Y/W are horizontal. `:xyz/w` is recommended for time-varied
+animations of 3D objects, where W is time (optional, default: `:standard`).
+#+end_example
+
 ***** Example
+TBD
 *** Value
 **** value-2d
-***** Parameter List
-***** Description
-***** Example
 **** value-3d
-***** Parameter List
-***** Description
-***** Example
 *** Cellular
 **** cellular-2d
-***** Parameter List
-***** Description
-***** Example
 **** cellular-3d
-***** Parameter List
-***** Description
-***** Example
 *** Cylinders
 **** cylinders-3d
-***** Parameter List
-***** Description
-***** Example
 *** Spheres
 **** spheres-3d
-***** Parameter List
-***** Description
-***** Example
 *** Checker
 **** checker-2d
-***** Parameter List
-***** Description
-***** Example
 *** Constant
 **** constant
-***** Parameter List
-***** Description
-***** Example
 *** FBM: Fractal Brownian Motion
 **** fbm-2d
-***** Parameter List
-***** Description
-***** Example
 **** fbm-3d
-***** Parameter List
-***** Description
-***** Example
 **** fbm-4d
-***** Parameter List
-***** Description
-***** Example
 *** Billow
 **** billow-2d
-***** Parameter List
-***** Description
-***** Example
 **** billow-3d
-***** Parameter List
-***** Description
-***** Example
 **** billow-4d
-***** Parameter List
-***** Description
-***** Example
 *** Multifractal
 **** multifractal-2d
-***** Parameter List
-***** Description
-***** Example
 **** multifractal-3d
-***** Parameter List
-***** Description
-***** Example
 **** multifractal-4d
-***** Parameter List
-***** Description
-***** Example
 *** Hybrid-Multifractal
 **** hybrid-multifractal-2d
-***** Parameter List
-***** Description
-***** Example
 **** hybrid-multifractal-3d
-***** Parameter List
-***** Description
-***** Example
 **** hybrid-multifractal-4d
-***** Parameter List
-***** Description
-***** Example
 *** Ridged-Multifractal
 **** ridged-multifractal-2d
-***** Parameter List
-***** Description
-***** Example
 **** ridged-multifractal-3d
-***** Parameter List
-***** Description
-***** Example
 **** ridged-multifractal-4d
-***** Parameter List
-***** Description
-***** Example
 ** Modifiers
 *** +
-**** Parameter List
-**** Description
-**** Example
 *** -
-**** Parameter List
-**** Description
-**** Example
 *** *
-**** Parameter List
-**** Description
-**** Example
 *** /
-**** Parameter List
-**** Description
-**** Example
 *** abs
-**** Parameter List
-**** Description
-**** Example
 *** blend
-**** Parameter List
-**** Description
-**** Example
 *** cache
-**** Parameter List
-**** Description
-**** Example
 *** clamp
-**** Parameter List
-**** Description
-**** Example
 *** curve
-**** Parameter List
-**** Description
-**** Example
 *** displace
-**** Parameter List
-**** Description
-**** Example
 *** expt
-**** Parameter List
-**** Description
-**** Example
 *** fractalize
-**** Parameter List
-**** Description
-**** Example
 *** max
-**** Parameter List
-**** Description
-**** Example
 *** negate
-**** Parameter List
-**** Description
-**** Example
 *** power
-**** Parameter List
-**** Description
-**** Example
 *** rotate
-**** Parameter List
-**** Description
-**** Example
 *** scale
-**** Parameter List
-**** Description
-**** Example
 *** select
-**** Parameter List
-**** Description
-**** Example
 *** strengthen
-**** Parameter List
-**** Description
-**** Example
 *** terrace
-**** Parameter List
-**** Description
-**** Example
 *** translate
-**** Parameter List
-**** Description
-**** Example
 *** turbulance
-**** Parameter List
-**** Description
-**** Example
 *** uniform-scale
-**** Parameter List
-**** Description
-**** Example
 ** Map
 *** define-gradient
 *** get-image-pixel
