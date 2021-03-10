@@ -401,17 +401,142 @@ away from their grid alignment (optional, default: 1.0).
 
 ***** Example
 TBD
-**** cellular-3d
+**** Function: *(cellular-3d &key seed (distance-method :euclidean) (output-type :f1) (jitter 1.0d0))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:cellular-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 3-dimensional cellular noise values ranging from
+-1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`distance-method`: One of `:manhattan`, `:euclidean`, `:euclidean-squared`, `:chebyshev`, or
+`:minkowski4`, denoting the distance function to use (optional, default: `:euclidean`).
+
+`output-type`: One of `:value`, `:f1`, `:f2`, `:f1+f2`, `:f2-f1`, `:f1*f2`, or `:f1/f2` denoting the
+features to use (optional, default: `:f1`).
+
+`jitter`: A real number between 0.0 and 1.0, with values closer to one randomly distributing cells
+away from their grid alignment (optional, default: 1.0).
+#+end_example
+
+***** Example
+TBD
 *** Cylinders
-**** cylinders-3d
+**** Function: *(cylinders-3d &key seed (frequency 1.0d0))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:cylinders-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 3-dimensional concentric cylinder values ranging
+: from -1.0 to 1.0. The cylinders are oriented with their length along the Z axis.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+:
+: `frequency`: The frequency of the signal, which controls how small or large the cylinders are
+: (optional, default: 1.0).
+
+***** Example
+TBD
 *** Spheres
-**** spheres-3d
+**** Function: *(spheres-3d &key seed (frequency 1.0d0))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:spheres-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 3-dimensional concentric sphere values ranging
+: from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+:
+: `frequency`: The frequency of the signal, which controls how small or large the spheres are
+: (optional, default: 1.0).
+
+***** Example
+TBD
 *** Checker
-**** checker-2d
+**** Function: *(checker-2d &key seed)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:checker-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs a 2-dimensional checkered grid pattern, with
+: values being either -1.0 or 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
+***** Example
+TBD
 *** Constant
-**** constant
+**** Function: *(constant value &key seed)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:constant 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs the constant `value` supplied. This is useful for
+: debugging and applications where you need to combine a constant value.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
+***** Example
+TBD
 *** FBM: Fractal Brownian Motion
-**** fbm-2d
+**** Function: *(fbm-2d &key seed (generator #'cricket.generators:open-simplex2f-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:fbm-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+2-dimensional fractional Brownian motion noise, using the supplied `generator` function to construct
+each octave's sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2f-2d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 0.5).
+#+end_example
+
+***** Example
+TBD
 **** fbm-3d
 **** fbm-4d
 *** Billow

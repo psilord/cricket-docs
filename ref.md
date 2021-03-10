@@ -1,33 +1,33 @@
-- [Cricket Introduction](#orgba9b6dc)
-- [Coherent Noise](#orgd3b7b1a)
-- [API](#orgc794715)
-  - [Generators](#org39d0bde)
-  - [Modifiers](#orgb3fb22a)
-  - [Map](#org68468fd)
-- [Glossary](#org0a9fc83)
-- [References](#org2ab7961)
-- [Prototyping](#orge6ac628)
-  - [Org Mode Code Block Examples](#org6247dfb)
-  - [Org Mode Wisdom](#org613119b)
+- [Cricket Introduction](#orge93d056)
+- [Coherent Noise](#orgb9f7ff7)
+- [API](#org30d0e1c)
+  - [Generators](#orgc7c922d)
+  - [Modifiers](#org863e066)
+  - [Map](#org110ccc5)
+- [Glossary](#org079ecc1)
+- [References](#org21281ab)
+- [Prototyping](#org3fd2bb4)
+  - [Org Mode Code Block Examples](#org068f05a)
+  - [Org Mode Wisdom](#org64fcdf3)
 
 
 
-<a id="orgba9b6dc"></a>
+<a id="orge93d056"></a>
 
 # Cricket Introduction
 
 
-<a id="orgd3b7b1a"></a>
+<a id="orgb9f7ff7"></a>
 
 # Coherent Noise
 
 
-<a id="orgc794715"></a>
+<a id="org30d0e1c"></a>
 
 # API
 
 
-<a id="org39d0bde"></a>
+<a id="orgc7c922d"></a>
 
 ## Generators
 
@@ -381,32 +381,141 @@
 
         TBD
 
-2.  cellular-3d
+2.  Function: **(cellular-3d &key seed (distance-method :euclidean) (output-type :f1) (jitter 1.0d0))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 3-dimensional cellular noise values ranging from
+            -1.0 to 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `distance-method`: One of `:manhattan`, `:euclidean`, `:euclidean-squared`, `:chebyshev`, or
+            `:minkowski4`, denoting the distance function to use (optional, default: `:euclidean`).
+
+            `output-type`: One of `:value`, `:f1`, `:f2`, `:f1+f2`, `:f2-f1`, `:f1*f2`, or `:f1/f2` denoting the
+            features to use (optional, default: `:f1`).
+
+            `jitter`: A real number between 0.0 and 1.0, with values closer to one randomly distributing cells
+            away from their grid alignment (optional, default: 1.0).
+
+    2.  Example
+
+        TBD
 
 
 ### Cylinders
 
-1.  cylinders-3d
+1.  Function: **(cylinders-3d &key seed (frequency 1.0d0))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 3-dimensional concentric cylinder values ranging
+            from -1.0 to 1.0. The cylinders are oriented with their length along the Z axis.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `frequency`: The frequency of the signal, which controls how small or large the cylinders are
+            (optional, default: 1.0).
+
+    2.  Example
+
+        TBD
 
 
 ### Spheres
 
-1.  spheres-3d
+1.  Function: **(spheres-3d &key seed (frequency 1.0d0))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 3-dimensional concentric sphere values ranging
+            from -1.0 to 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `frequency`: The frequency of the signal, which controls how small or large the spheres are
+            (optional, default: 1.0).
+
+    2.  Example
+
+        TBD
 
 
 ### Checker
 
-1.  checker-2d
+1.  Function: **(checker-2d &key seed)**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs a 2-dimensional checkered grid pattern, with
+            values being either -1.0 or 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
 
 
 ### Constant
 
-1.  constant
+1.  Function: **(constant value &key seed)**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the constant `value` supplied. This is useful for
+            debugging and applications where you need to combine a constant value.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
 
 
 ### FBM: Fractal Brownian Motion
 
-1.  fbm-2d
+1.  Function: **(fbm-2d &key seed (generator #'cricket.generators:open-simplex2f-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            2-dimensional fractional Brownian motion noise, using the supplied `generator` function to construct
+            each octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2f-2d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
 
 2.  fbm-3d
 
@@ -449,7 +558,7 @@
 3.  ridged-multifractal-4d
 
 
-<a id="orgb3fb22a"></a>
+<a id="org863e066"></a>
 
 ## Modifiers
 
@@ -523,7 +632,7 @@
 ### uniform-scale
 
 
-<a id="org68468fd"></a>
+<a id="org110ccc5"></a>
 
 ## Map
 
@@ -560,24 +669,24 @@
 ### write-image
 
 
-<a id="org0a9fc83"></a>
+<a id="org079ecc1"></a>
 
 # Glossary
 
 
-<a id="org2ab7961"></a>
+<a id="org21281ab"></a>
 
 # References
 
 
-<a id="orge6ac628"></a>
+<a id="org3fd2bb4"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org6247dfb"></a>
+<a id="org068f05a"></a>
 
 ## Org Mode Code Block Examples
 
@@ -632,7 +741,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org613119b"></a>
+<a id="org64fcdf3"></a>
 
 ## Org Mode Wisdom
 
