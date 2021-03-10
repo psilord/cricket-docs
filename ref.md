@@ -1,33 +1,33 @@
-- [Cricket Introduction](#org41168f2)
-- [Coherent Noise](#org6a120e7)
-- [API](#org77b2692)
-  - [Generators](#org2602ea4)
-  - [Modifiers](#orgb5b6b6a)
-  - [Map](#org16a5723)
-- [Glossary](#org9ece3b7)
-- [References](#org9785a03)
-- [Prototyping](#orgd88ca66)
-  - [Org Mode Code Block Examples](#orgc2e0a1e)
-  - [Org Mode Wisdom](#orgdd6b487)
+- [Cricket Introduction](#orgfd79a2a)
+- [Coherent Noise](#org9fa748c)
+- [API](#orgecce0f2)
+  - [Generators](#org0d98228)
+  - [Modifiers](#org4e34207)
+  - [Map](#orgcc1c4e2)
+- [Glossary](#orged2bd0d)
+- [References](#orge0d0f50)
+- [Prototyping](#org927d71d)
+  - [Org Mode Code Block Examples](#orge921311)
+  - [Org Mode Wisdom](#org72cbb97)
 
 
 
-<a id="org41168f2"></a>
+<a id="orgfd79a2a"></a>
 
 # Cricket Introduction
 
 
-<a id="org6a120e7"></a>
+<a id="org9fa748c"></a>
 
 # Coherent Noise
 
 
-<a id="org77b2692"></a>
+<a id="orgecce0f2"></a>
 
 # API
 
 
-<a id="org2602ea4"></a>
+<a id="org0d98228"></a>
 
 ## Generators
 
@@ -97,37 +97,65 @@
 
 ### Simplex
 
-1.  simplex-1d
+1.  Function: **(simplex-1d &key seed)**
 
-    1.  Parameter List
+    1.  Description
 
-    2.  Description
+            Construct a sampler that, when sampled, outputs 1-dimensional Simplex noise values ranging from
+            -1.0 to 1.0.
 
-    3.  Example
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
 
-2.  simplex-2d
+    2.  Example
 
-    1.  Parameter List
+        TBD
 
-    2.  Description
+2.  Function: **(simplex-2d &key seed)**
 
-    3.  Example
+    1.  Description
 
-3.  simplex-3d
+            Construct a sampler that, when sampled, outputs 2-dimensional Simplex noise values ranging from
+            -1.0 to 1.0.
 
-    1.  Parameter List
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
 
-    2.  Description
+    2.  Example
 
-    3.  Example
+        TBD
 
-4.  simplex-4d
+3.  Function: **(simplex-3d &key seed)**
 
-    1.  Parameter List
+    1.  Description
 
-    2.  Description
+            Construct a sampler that, when sampled, outputs 3-dimensional Simplex noise values ranging from
+            -1.0 to 1.0.
 
-    3.  Example
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
+
+4.  Function: **(simplex-4d &key seed)**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 4-dimensional Simplex noise values ranging from
+            -1.0 to 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
 
 
 ### Open-Simplex
@@ -422,7 +450,7 @@
     3.  Example
 
 
-<a id="orgb5b6b6a"></a>
+<a id="org4e34207"></a>
 
 ## Modifiers
 
@@ -634,7 +662,7 @@
 3.  Example
 
 
-<a id="org16a5723"></a>
+<a id="orgcc1c4e2"></a>
 
 ## Map
 
@@ -671,24 +699,24 @@
 ### write-image
 
 
-<a id="org9ece3b7"></a>
+<a id="orged2bd0d"></a>
 
 # Glossary
 
 
-<a id="org9785a03"></a>
+<a id="orge0d0f50"></a>
 
 # References
 
 
-<a id="orgd88ca66"></a>
+<a id="org927d71d"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="orgc2e0a1e"></a>
+<a id="orge921311"></a>
 
 ## Org Mode Code Block Examples
 
@@ -743,7 +771,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgdd6b487"></a>
+<a id="org72cbb97"></a>
 
 ## Org Mode Wisdom
 

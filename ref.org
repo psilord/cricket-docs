@@ -93,22 +93,70 @@ TBD
 ***** Example
 TBD
 *** Simplex
-**** simplex-1d
-***** Parameter List
+**** Function: *(simplex-1d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:simplex-1d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 1-dimensional Simplex noise values ranging from
+: -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** simplex-2d
-***** Parameter List
+TBD
+**** Function: *(simplex-2d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:simplex-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 2-dimensional Simplex noise values ranging from
+: -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** simplex-3d
-***** Parameter List
+TBD
+**** Function: *(simplex-3d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:simplex-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 3-dimensional Simplex noise values ranging from
+: -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** simplex-4d
-***** Parameter List
+TBD
+**** Function: *(simplex-4d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:simplex-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 4-dimensional Simplex noise values ranging from
+: -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
+TBD
 *** Open-Simplex
 **** open-simplex-2d
 ***** Parameter List
