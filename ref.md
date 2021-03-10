@@ -1,35 +1,35 @@
-- [Cricket Introduction](#orgb8d2376)
-- [Coherent Noise](#org44adc6a)
-- [API](#orgc35fa44)
-  - [Generators](#orgd4b0433)
-  - [Modifiers](#org7186e6a)
-  - [Map](#org09f470f)
-- [Glossary](#org4f55fc9)
-- [References](#org504c3e9)
-- [Prototyping](#orgcbc8626)
-  - [Org Mode Code Block Examples](#org7117c55)
-  - [Org Mode Wisdom](#orgf9b5abb)
+- [Cricket Introduction](#orgf2f123f)
+- [Coherent Noise](#org7107a42)
+- [API](#org351a018)
+  - [Generators](#org1648405)
+  - [Modifiers](#orge447f46)
+  - [Map](#org822d42c)
+- [Glossary](#org2588233)
+- [References](#org7ddb978)
+- [Prototyping](#org4d01dde)
+  - [Org Mode Code Block Examples](#orgc2ab0db)
+  - [Org Mode Wisdom](#org457248e)
 
 
 
-<a id="orgb8d2376"></a>
+<a id="orgf2f123f"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org44adc6a"></a>
+<a id="org7107a42"></a>
 
 # Coherent Noise
 
 
-<a id="orgc35fa44"></a>
+<a id="org351a018"></a>
 
 # API
 
 
-<a id="orgd4b0433"></a>
+<a id="org1648405"></a>
 
 ## Generators
 
@@ -208,7 +208,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
         TBD
 
 
-### Open-Simplex 2F
+### Open-Simplex 2F (Fast)
 
 1.  Function: **(open-simplex2f-2d &key seed (orientation :standard))**
 
@@ -269,7 +269,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
         TBD
 
 
-### Open-Simplex 2S
+### Open-Simplex 2S (Smooth)
 
 1.  Function: **(open-simplex2s-2d &key seed (orientation :standard))**
 
@@ -798,7 +798,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 3.  ridged-multifractal-4d
 
 
-<a id="org7186e6a"></a>
+<a id="orge447f46"></a>
 
 ## Modifiers
 
@@ -872,7 +872,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### uniform-scale
 
 
-<a id="org09f470f"></a>
+<a id="org822d42c"></a>
 
 ## Map
 
@@ -909,24 +909,24 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### write-image
 
 
-<a id="org4f55fc9"></a>
+<a id="org2588233"></a>
 
 # Glossary
 
 
-<a id="org504c3e9"></a>
+<a id="org7ddb978"></a>
 
 # References
 
 
-<a id="orgcbc8626"></a>
+<a id="org4d01dde"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org7117c55"></a>
+<a id="orgc2ab0db"></a>
 
 ## Org Mode Code Block Examples
 
@@ -981,7 +981,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgf9b5abb"></a>
+<a id="org457248e"></a>
 
 ## Org Mode Wisdom
 

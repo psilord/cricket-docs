@@ -208,7 +208,7 @@ TBD
 
 ***** Example
 TBD
-*** Open-Simplex 2F
+*** Open-Simplex 2F (Fast)
 **** Function: *(open-simplex2f-2d &key seed (orientation :standard))*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -276,7 +276,7 @@ animations of 3D objects, where W is time (optional, default: `:standard`).
 
 ***** Example
 TBD
-*** Open-Simplex 2S
+*** Open-Simplex 2S (Smooth)
 **** Function: *(open-simplex2s-2d &key seed (orientation :standard))*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
