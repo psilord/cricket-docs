@@ -1,35 +1,35 @@
-- [Cricket Introduction](#org8ae4dd3)
-- [Coherent Noise](#orgbd4ff32)
-- [API](#orgcd6aa6b)
-  - [Generators](#org193e149)
-  - [Modifiers](#orgc1337ee)
-  - [Map](#orgc40861a)
-- [Glossary](#org148c316)
-- [References](#orgafa820c)
-- [Prototyping](#org40b1114)
-  - [Org Mode Code Block Examples](#org455bc16)
-  - [Org Mode Wisdom](#org04378ba)
+- [Cricket Introduction](#orgf6fd26b)
+- [Coherent Noise](#org9645db3)
+- [API](#org912138b)
+  - [Generators](#org374d4af)
+  - [Modifiers](#orgb4df79c)
+  - [Map](#org5409f1a)
+- [Glossary](#orge881d5b)
+- [References](#orgb640a7b)
+- [Prototyping](#orgf8632ff)
+  - [Org Mode Code Block Examples](#orga0ee737)
+  - [Org Mode Wisdom](#org8755132)
 
 
 
-<a id="org8ae4dd3"></a>
+<a id="orgf6fd26b"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="orgbd4ff32"></a>
+<a id="org9645db3"></a>
 
 # Coherent Noise
 
 
-<a id="orgcd6aa6b"></a>
+<a id="org912138b"></a>
 
 # API
 
 
-<a id="org193e149"></a>
+<a id="org374d4af"></a>
 
 ## Generators
 
@@ -488,7 +488,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
 ### FBM: Fractal Brownian Motion
 
-1.  Function: **(fbm-2d &key seed (generator #'cricket.generators:open-simplex2f-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
+1.  Function: **(fbm-2d &key seed (generator #'cricket:open-simplex2f-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
 
     1.  Description
 
@@ -519,18 +519,163 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
         TBD
 
-2.  fbm-3d
+2.  Function: **(fbm-3d &key seed (generator #'cricket:open-simplex2f-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
 
-3.  fbm-4d
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            3-dimensional fractional Brownian motion noise, using the supplied `generator` function to construct
+            each octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2f-3d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
+
+3.  Function: **(fbm-4d &key seed (generator #'cricket:open-simplex2f-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            4-dimensional fractional Brownian motion noise, using the supplied `generator` function to construct
+            each octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2f-4d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
 
 
 ### Billow
 
-1.  billow-2d
+1.  Function: **(billow-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
 
-2.  billow-3d
+    1.  Description
 
-3.  billow-4d
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            2-dimensional billow fractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-2d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
+
+2.  Function: **(billow-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            3-dimensional billow fractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-3d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
+
+3.  Function: **(billow-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            4-dimensional billow fractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-4d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.5).
+
+    2.  Example
+
+        TBD
 
 
 ### Multifractal
@@ -560,7 +705,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 3.  ridged-multifractal-4d
 
 
-<a id="orgc1337ee"></a>
+<a id="orgb4df79c"></a>
 
 ## Modifiers
 
@@ -634,7 +779,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### uniform-scale
 
 
-<a id="orgc40861a"></a>
+<a id="org5409f1a"></a>
 
 ## Map
 
@@ -671,24 +816,24 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### write-image
 
 
-<a id="org148c316"></a>
+<a id="orge881d5b"></a>
 
 # Glossary
 
 
-<a id="orgafa820c"></a>
+<a id="orgb640a7b"></a>
 
 # References
 
 
-<a id="org40b1114"></a>
+<a id="orgf8632ff"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org455bc16"></a>
+<a id="orga0ee737"></a>
 
 ## Org Mode Code Block Examples
 
@@ -743,7 +888,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org04378ba"></a>
+<a id="org8755132"></a>
 
 ## Org Mode Wisdom
 
