@@ -1,71 +1,98 @@
-- [Cricket Introduction](#org23afd07)
-- [Coherent Noise](#orgf307d8e)
-- [API](#org399c985)
-  - [Generators](#org888a7d0)
-  - [Modifiers](#orge2761a0)
-  - [Map](#org7c6bea3)
-- [Glossary](#org9ee3f3f)
-- [References](#orgb9b97d9)
-- [Prototyping](#org9007d57)
-  - [Org Mode Code Block Examples](#orga96f416)
-  - [Org Mode Wisdom](#orgef33d2e)
-- [Org Mode Utilities](#org29cfd6d)
+- [Cricket Introduction](#org41168f2)
+- [Coherent Noise](#org6a120e7)
+- [API](#org77b2692)
+  - [Generators](#org2602ea4)
+  - [Modifiers](#orgb5b6b6a)
+  - [Map](#org16a5723)
+- [Glossary](#org9ece3b7)
+- [References](#org9785a03)
+- [Prototyping](#orgd88ca66)
+  - [Org Mode Code Block Examples](#orgc2e0a1e)
+  - [Org Mode Wisdom](#orgdd6b487)
 
 
 
-<a id="org23afd07"></a>
+<a id="org41168f2"></a>
 
 # Cricket Introduction
 
 
-<a id="orgf307d8e"></a>
+<a id="org6a120e7"></a>
 
 # Coherent Noise
 
 
-<a id="org399c985"></a>
+<a id="org77b2692"></a>
 
 # API
 
 
-<a id="org888a7d0"></a>
+<a id="org2602ea4"></a>
 
 ## Generators
 
 
 ### Perlin
 
-1.  perlin-1d
+1.  Function: **(perlin-1d &key seed)**
 
-    1.  Parameter List
+    1.  Description
 
-    2.  Description
+            Construct a sampler that, when sampled, outputs 1-dimensional Perlin Improved noise values
+            ranging from -1.0 to 1.0.
 
-    3.  Example
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
 
-2.  perlin-2d
+    2.  Example
 
-    1.  Parameter List
+        TBD
 
-    2.  Description
+2.  Function: **(perlin-2d &key seed)**
 
-    3.  Example
+    1.  Description
 
-3.  perlin-3d
+            Construct a sampler that, when sampled, outputs 2-dimensional Perlin Improved noise values
+            ranging from -1.0 to 1.0.
 
-    1.  Parameter List
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
 
-    2.  Description
+    2.  Example
 
-    3.  Example
+        TBD
 
-4.  perlin-4d
+3.  Function: **(perlin-3d &key seed)**
 
-    1.  Parameter List
+    1.  Description
 
-    2.  Description
+            Construct a sampler that, when sampled, outputs 3-dimensional Perlin Improved noise values
+            ranging from -1.0 to 1.0.
 
-    3.  Example
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
+
+4.  Function: **(perlin-4d &key seed)**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 4-dimensional Perlin Improved noise values
+            ranging from -1.0 to 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
 
 
 ### Simplex
@@ -395,7 +422,7 @@
     3.  Example
 
 
-<a id="orge2761a0"></a>
+<a id="orgb5b6b6a"></a>
 
 ## Modifiers
 
@@ -607,7 +634,7 @@
 3.  Example
 
 
-<a id="org7c6bea3"></a>
+<a id="org16a5723"></a>
 
 ## Map
 
@@ -644,24 +671,24 @@
 ### write-image
 
 
-<a id="org9ee3f3f"></a>
+<a id="org9ece3b7"></a>
 
 # Glossary
 
 
-<a id="orgb9b97d9"></a>
+<a id="org9785a03"></a>
 
 # References
 
 
-<a id="org9007d57"></a>
+<a id="orgd88ca66"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="orga96f416"></a>
+<a id="orgc2e0a1e"></a>
 
 ## Org Mode Code Block Examples
 
@@ -716,7 +743,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgef33d2e"></a>
+<a id="orgdd6b487"></a>
 
 ## Org Mode Wisdom
 
@@ -737,11 +764,4 @@ Used to toggle all inline images on and off.
 
 ### C-c C-v b - org-babel-execute-buffer.
 
-Execute all code blocks in the buffer and update the results. Must usually
-
-
-<a id="org29cfd6d"></a>
-
-# Org Mode Utilities
-
-The following utility is a post processor to convert the absolute pathname of C:WRITE-IMAGE which has been flatted into a string by org mode&#x2013;with the #P and double quotes included(!), into a string of just the relative filename given the cwd of theemacs process. This is a pure hack that suffices for this one use case so I can develop these docs with a fast workflow.
+Execute all code blocks in the buffer and update the results.

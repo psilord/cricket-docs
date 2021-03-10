@@ -27,23 +27,71 @@ all docstrings.
 * Coherent Noise
 * API
 ** Generators
-*** [#B] Perlin
-**** perlin-1d
-***** Parameter List
+*** Perlin
+**** Function: *(perlin-1d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:perlin-1d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 1-dimensional Perlin Improved noise values
+: ranging from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** perlin-2d
-***** Parameter List
+TBD
+**** Function: *(perlin-2d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:perlin-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 2-dimensional Perlin Improved noise values
+: ranging from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** perlin-3d
-***** Parameter List
+TBD
+**** Function: *(perlin-3d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:perlin-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 3-dimensional Perlin Improved noise values
+: ranging from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
-**** perlin-4d
-***** Parameter List
+TBD
+**** Function: *(perlin-4d &key seed)*
 ***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:perlin-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 4-dimensional Perlin Improved noise values
+: ranging from -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
 ***** Example
+TBD
 *** Simplex
 **** simplex-1d
 ***** Parameter List
@@ -383,15 +431,17 @@ Documentation retrival test:
 Used to toggle all inline images on and off.
 *** C-c C-v b - org-babel-execute-buffer.
 Execute all code blocks in the buffer and update the results.
-Must usually
 
-* Org Mode Utilities
-The following utility is a post processor to convert the absolute pathname
-of C:WRITE-IMAGE which has been flatted into a string by org mode--with
-the #P and double quotes included(!), into a string of just the
-relative filename given the cwd of theemacs process.
+#+BEGIN_COMMENT
+
+The following code block utility is a post processor to convert the
+absolute pathname of C:WRITE-IMAGE which has been flatted into a
+string by org mode--with the #P and double quotes included(!), into
+a string of just the relative filename given the cwd of theemacs process.
 This is a pure hack that suffices for this one use case so I can develop
 these docs with a fast workflow.
+
+#+END_COMMENT
 #+NAME: namestring
 #+BEGIN_SRC lisp :var path="" :results output :exports none
 (block hack
