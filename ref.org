@@ -341,10 +341,66 @@ animations of 3D objects, where W is time (optional, default: `:standard`).
 ***** Example
 TBD
 *** Value
-**** value-2d
-**** value-3d
+**** Function: *(value-2d &key seed)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:value-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 2-dimensional value noise values ranging from
+: -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
+***** Example
+TBD
+**** Function: *(value-3d &key seed)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:value-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs 3-dimensional value noise values ranging from
+: -1.0 to 1.0.
+:
+: `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+: supplied, one will be generated automatically which will negatively affect the reproducibility of
+: the noise (optional, default: NIL).
+
+***** Example
+TBD
 *** Cellular
-**** cellular-2d
+**** Function: *(cellular-2d &key seed (distance-method :euclidean) (output-type :f1) (jitter 1.0d0))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:cellular-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs 2-dimensional cellular noise values ranging from
+-1.0 to 1.0.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`distance-method`: One of `:manhattan`, `:euclidean`, `:euclidean-squared`, `:chebyshev`, or
+`:minkowski4`, denoting the distance function to use (optional, default: `:euclidean`).
+
+`output-type`: One of `:value`, `:f1`, `:f2`, `:f1+f2`, `:f2-f1`, `:f1*f2`, or `:f1/f2` denoting the
+features to use (optional, default: `:f1`).
+
+`jitter`: A real number between 0.0 and 1.0, with values closer to one randomly distributing cells
+away from their grid alignment (optional, default: 1.0).
+#+end_example
+
+***** Example
+TBD
 **** cellular-3d
 *** Cylinders
 **** cylinders-3d

@@ -1,33 +1,33 @@
-- [Cricket Introduction](#org61cd912)
-- [Coherent Noise](#org9a003d0)
-- [API](#orgc793bc1)
-  - [Generators](#org5a1efe2)
-  - [Modifiers](#org20bd21f)
-  - [Map](#orgedea447)
-- [Glossary](#org69afa39)
-- [References](#org45acdff)
-- [Prototyping](#orgff748c3)
-  - [Org Mode Code Block Examples](#orga32525c)
-  - [Org Mode Wisdom](#org36204b8)
+- [Cricket Introduction](#orgba9b6dc)
+- [Coherent Noise](#orgd3b7b1a)
+- [API](#orgc794715)
+  - [Generators](#org39d0bde)
+  - [Modifiers](#orgb3fb22a)
+  - [Map](#org68468fd)
+- [Glossary](#org0a9fc83)
+- [References](#org2ab7961)
+- [Prototyping](#orge6ac628)
+  - [Org Mode Code Block Examples](#org6247dfb)
+  - [Org Mode Wisdom](#org613119b)
 
 
 
-<a id="org61cd912"></a>
+<a id="orgba9b6dc"></a>
 
 # Cricket Introduction
 
 
-<a id="org9a003d0"></a>
+<a id="orgd3b7b1a"></a>
 
 # Coherent Noise
 
 
-<a id="orgc793bc1"></a>
+<a id="orgc794715"></a>
 
 # API
 
 
-<a id="org5a1efe2"></a>
+<a id="org39d0bde"></a>
 
 ## Generators
 
@@ -324,14 +324,62 @@
 
 ### Value
 
-1.  value-2d
+1.  Function: **(value-2d &key seed)**
 
-2.  value-3d
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 2-dimensional value noise values ranging from
+            -1.0 to 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
+
+2.  Function: **(value-3d &key seed)**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 3-dimensional value noise values ranging from
+            -1.0 to 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+    2.  Example
+
+        TBD
 
 
 ### Cellular
 
-1.  cellular-2d
+1.  Function: **(cellular-2d &key seed (distance-method :euclidean) (output-type :f1) (jitter 1.0d0))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs 2-dimensional cellular noise values ranging from
+            -1.0 to 1.0.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `distance-method`: One of `:manhattan`, `:euclidean`, `:euclidean-squared`, `:chebyshev`, or
+            `:minkowski4`, denoting the distance function to use (optional, default: `:euclidean`).
+
+            `output-type`: One of `:value`, `:f1`, `:f2`, `:f1+f2`, `:f2-f1`, `:f1*f2`, or `:f1/f2` denoting the
+            features to use (optional, default: `:f1`).
+
+            `jitter`: A real number between 0.0 and 1.0, with values closer to one randomly distributing cells
+            away from their grid alignment (optional, default: 1.0).
+
+    2.  Example
+
+        TBD
 
 2.  cellular-3d
 
@@ -401,7 +449,7 @@
 3.  ridged-multifractal-4d
 
 
-<a id="org20bd21f"></a>
+<a id="orgb3fb22a"></a>
 
 ## Modifiers
 
@@ -475,7 +523,7 @@
 ### uniform-scale
 
 
-<a id="orgedea447"></a>
+<a id="org68468fd"></a>
 
 ## Map
 
@@ -512,24 +560,24 @@
 ### write-image
 
 
-<a id="org69afa39"></a>
+<a id="org0a9fc83"></a>
 
 # Glossary
 
 
-<a id="org45acdff"></a>
+<a id="org2ab7961"></a>
 
 # References
 
 
-<a id="orgff748c3"></a>
+<a id="orge6ac628"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="orga32525c"></a>
+<a id="org6247dfb"></a>
 
 ## Org Mode Code Block Examples
 
@@ -584,7 +632,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org36204b8"></a>
+<a id="org613119b"></a>
 
 ## Org Mode Wisdom
 
