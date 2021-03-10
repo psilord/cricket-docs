@@ -176,7 +176,7 @@ TBD
 
 ***** Example
 TBD
-**** Function: *(open-simplex-3d *key seed)*
+**** Function: *(open-simplex-3d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
 (format t "~A" (documentation #'c:open-simplex-3d 'function)))
