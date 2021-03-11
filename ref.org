@@ -1519,7 +1519,7 @@ octaves (optional, default 1.0).
 ** Modifiers
 
 Some of examples in these modifiers use ~strengthen~ in the
-resultat noise signal in order to rescale the output so it fits into the
+resultant noise signal in order to rescale the output so it fits into the
 color range of the image. Otherwise, as minimal examples as possible are
 constructed.
 
