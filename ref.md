@@ -1,30 +1,30 @@
-- [Cricket Introduction](#org4f8d54e)
-- [Coherent Noise](#org3d79e4a)
-- [API](#org4e80abc)
-  - [Generators](#orgca01fdf)
-  - [Modifiers](#orgadf7718)
-  - [Map](#org66a7911)
-- [Glossary](#orga703bcc)
-- [References](#orgd4e1458)
-- [Prototyping](#org991599d)
-  - [Org Mode Code Block Examples](#org7f46856)
-  - [Org Mode Wisdom](#org24315f6)
+- [Cricket Introduction](#orgbccaddb)
+- [Coherent Noise](#org81da200)
+- [API](#org35d2dad)
+  - [Generators](#org79edcfb)
+  - [Modifiers](#org22fa869)
+  - [Map](#org925b374)
+- [Glossary](#orgb568d5c)
+- [References](#org868c6a1)
+- [Prototyping](#org38f74ac)
+  - [Org Mode Code Block Examples](#orgaf01d14)
+  - [Org Mode Wisdom](#orgc8a28e0)
 
 
 
-<a id="org4f8d54e"></a>
+<a id="orgbccaddb"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org3d79e4a"></a>
+<a id="org81da200"></a>
 
 # Coherent Noise
 
 
-<a id="org4e80abc"></a>
+<a id="org35d2dad"></a>
 
 # API
 
@@ -43,7 +43,7 @@ For all of these examples, for package brevity, assume that this piece of code h
 ```
 
 
-<a id="orgca01fdf"></a>
+<a id="org79edcfb"></a>
 
 ## Generators
 
@@ -695,7 +695,9 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
     2.  Example
 
-        When rendering this to an image. 0 is black and 1 is white. So .5 should be a middle grey color.
+        The value is a coefficient between 0 and 1 that represents a linearly inerpolated value from -1 to 1. It is this interpolated value that is emitted by the constant function.
+
+        In this example, the .5 value actually means to emit a constant value halfway from -1 to 1, which is 0 in the range -1 to 1. Then, render-map will rescale this to fit into the color gamut, resulting in a color that is (red: .5, green: .5, blue: .5). Be aware of the remapping of ranges with this function.
 
         ```lisp
         (c:-> (c:constant .5 :seed "example")
@@ -1304,15 +1306,67 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="orgadf7718"></a>
+<a id="org22fa869"></a>
 
 ## Modifiers
+
+Some of examples in these modifiers use `strengthen` in the resultat noise signal in order to rescale the output so it fits into the color range of the image. Otherwise, as minimal examples as possible are constructed.
 
 
 ### +
 
+1.  Function: **(+ source1 source2)**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the result of adding the outputs of `source1` and
+            `source2`.
+
+            `source1`: The first input sampler (required).
+
+            `source2`: The second input sampler (required).
+
+    2.  Example
+
+        This example averages two noise sources together.
+
+        ```lisp
+        (c:-> (c:+ (c:billow-2d :seed "example")
+                   (c:checker-2d :seed "example"))
+          (c:strengthen 1/2)
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/plus-ex0.png)
+
 
 ### -
+
+1.  Description
+
+        Construct a sampler that, when sampled, outputs the result of subtracting the output `source2`
+        from the output of `source1`.
+
+        `source1`: The first input sampler (required).
+
+        `source2`: The second input sampler (required).
+
+2.  Example
+
+    TODO: Fix this example.
+
+    ```lisp
+    (c:-> (c:- (c:checker-2d :seed "example")
+               (c:checker-2d :seed "example"))
+      (c:strengthen 1/2)
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/minus-ex0.png)
 
 
 ### \*
@@ -1378,7 +1432,7 @@ The Generators are demonstrated with no modifications applied to the noise signa
 ### uniform-scale
 
 
-<a id="org66a7911"></a>
+<a id="org925b374"></a>
 
 ## Map
 
@@ -1415,24 +1469,24 @@ The Generators are demonstrated with no modifications applied to the noise signa
 ### write-image
 
 
-<a id="orga703bcc"></a>
+<a id="orgb568d5c"></a>
 
 # Glossary
 
 
-<a id="orgd4e1458"></a>
+<a id="org868c6a1"></a>
 
 # References
 
 
-<a id="org991599d"></a>
+<a id="org38f74ac"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org7f46856"></a>
+<a id="orgaf01d14"></a>
 
 ## Org Mode Code Block Examples
 
@@ -1487,7 +1541,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org24315f6"></a>
+<a id="orgc8a28e0"></a>
 
 ## Org Mode Wisdom
 

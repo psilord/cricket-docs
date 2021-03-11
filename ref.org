@@ -806,8 +806,15 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-When rendering this to an image. 0 is black and 1 is white. So .5
-should be a middle grey color.
+The value is a coefficient between 0 and 1 that represents a linearly
+inerpolated value from -1 to 1. It is this interpolated value that
+is emitted by the constant function.
+
+In this example, the .5 value actually means to emit a
+constant value halfway from -1 to 1, which is 0 in the range -1 to 1.
+Then, render-map will rescale this to fit into the color gamut,
+resulting in a color that is (red: .5, green: .5, blue: .5). Be aware
+of the remapping of ranges with this function.
 
 #+BEGIN_SRC lisp :var arg="img/api/constant-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
 (c:-> (c:constant .5 :seed "example")
@@ -1510,8 +1517,73 @@ octaves (optional, default 1.0).
 :end:
 
 ** Modifiers
+
+Some of examples in these modifiers use ~strengthen~ in the
+resultat noise signal in order to rescale the output so it fits into the
+color range of the image. Otherwise, as minimal examples as possible are
+constructed.
+
 *** +
+**** Function: *(+ source1 source2)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:+ 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs the result of adding the outputs of `source1` and
+: `source2`.
+:
+: `source1`: The first input sampler (required).
+:
+: `source2`: The second input sampler (required).
+
+***** Example
+
+This example averages two noise sources together.
+
+#+BEGIN_SRC lisp :var arg="img/api/plus-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:+ (c:billow-2d :seed "example")
+           (c:checker-2d :seed "example"))
+  (c:strengthen 1/2)
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/plus-ex0.png]]
+:end:
 *** -
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:- 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs the result of subtracting the output `source2`
+: from the output of `source1`.
+:
+: `source1`: The first input sampler (required).
+:
+: `source2`: The second input sampler (required).
+
+***** Example
+TODO: Fix this example.
+#+BEGIN_SRC lisp :var arg="img/api/minus-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:- (c:checker-2d :seed "example")
+           (c:checker-2d :seed "example"))
+  (c:strengthen 1/2)
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/minus-ex0.png]]
+:end:
 *** *
 *** /
 *** abs
