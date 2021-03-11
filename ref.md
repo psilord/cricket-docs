@@ -1,30 +1,30 @@
-- [Cricket Introduction](#org6e199b9)
-- [Coherent Noise](#orgfd8ca6b)
-- [API](#org9bf7b05)
-  - [Generators](#org0269d3f)
-  - [Modifiers](#org35a2228)
-  - [Map](#org6e6513e)
-- [Glossary](#org36ee383)
-- [References](#org8f47f00)
-- [Prototyping](#orga7f3f1a)
-  - [Org Mode Code Block Examples](#org1b307cd)
-  - [Org Mode Wisdom](#orgfb162df)
+- [Cricket Introduction](#org239ddca)
+- [Coherent Noise](#org94fe65d)
+- [API](#org3534728)
+  - [Generators](#org41619c9)
+  - [Modifiers](#orga195c35)
+  - [Map](#orga98a93f)
+- [Glossary](#org0f50eed)
+- [References](#org42c0eac)
+- [Prototyping](#org7bce0f9)
+  - [Org Mode Code Block Examples](#org91642a6)
+  - [Org Mode Wisdom](#orgd0619bf)
 
 
 
-<a id="org6e199b9"></a>
+<a id="org239ddca"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="orgfd8ca6b"></a>
+<a id="org94fe65d"></a>
 
 # Coherent Noise
 
 
-<a id="org9bf7b05"></a>
+<a id="org3534728"></a>
 
 # API
 
@@ -43,7 +43,7 @@ For all of these examples, for package brevity, assume that this piece of code h
 ```
 
 
-<a id="org0269d3f"></a>
+<a id="org41619c9"></a>
 
 ## Generators
 
@@ -1306,7 +1306,7 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="org35a2228"></a>
+<a id="orga195c35"></a>
 
 ## Modifiers
 
@@ -1364,7 +1364,7 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
     ![img](./img/api/minus-ex0.png)
 
 
-### \*
+### Function: **(\*** **source1 source2)**
 
 1.  Description
 
@@ -1465,7 +1465,7 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### uniform-scale
 
 
-<a id="org6e6513e"></a>
+<a id="orga98a93f"></a>
 
 ## Map
 
@@ -1502,24 +1502,24 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### write-image
 
 
-<a id="org36ee383"></a>
+<a id="org0f50eed"></a>
 
 # Glossary
 
 
-<a id="org8f47f00"></a>
+<a id="org42c0eac"></a>
 
 # References
 
 
-<a id="orga7f3f1a"></a>
+<a id="org7bce0f9"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org1b307cd"></a>
+<a id="org91642a6"></a>
 
 ## Org Mode Code Block Examples
 
@@ -1574,7 +1574,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgfb162df"></a>
+<a id="orgd0619bf"></a>
 
 ## Org Mode Wisdom
 

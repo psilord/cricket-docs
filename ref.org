@@ -1581,7 +1581,7 @@ This example averages two noise sources together.
 :results:
 [[file:./img/api/minus-ex0.png]]
 :end:
-*** *
+*** Function: *(** *source1 source2)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
 (format t "~A" (documentation #'c:* 'function)))
