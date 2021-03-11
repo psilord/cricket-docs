@@ -1,0 +1,4 @@
+static		- Nongenerated images.
+ex 			- Generated images used in exposition examples, NOT the API section
+api 		- Generated images used only in the API examples section
+proto		- images for prototyping features of the document. soon removed.

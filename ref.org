@@ -28,7 +28,31 @@ This document describes the ~cricket~ coherent noise library. It is in the
 process of being written.
 * Coherent Noise
 * API
+Cricket's API is split into three main pieces: Generators which generate a
+source signal of noise, Modifiers which mutate, combine, or otherwise alter a
+noise signal, and Maps which control how noise gets rendered to an in memory
+image (which can then be stored to disk).
+
+All of the examples show at least the simplest use of the noise function
+with no additional affects on it. Some examples may demonstrate additional
+effects in the parameter space of the functions.
+
+For all of these examples, for package brevity, assume that this piece
+of code has been run in your REPL:
+
+#+BEGIN_SRC lisp :results output silent
+(ql:quickload :cricket)
+(defpackage #:my-package
+  (:local-nicknames (#:c #:cricket))
+  (:use #:cl))
+(in-package #:my-package)
+#+END_SRC
+
 ** Generators
+
+The Generators are demonstrated with no modifications applied to the
+noise signal.
+
 *** Perlin
 **** Function: *(perlin-1d &key seed)*
 ***** Description
@@ -45,7 +69,20 @@ process of being written.
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+We encode the 1D noise into a 2D image by simply repeating the noise
+for each row.
+#+BEGIN_SRC lisp :var arg="img/api/perlin-1d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:perlin-1d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/perlin-1d-ex0.png]]
+:end:
+
 **** Function: *(perlin-2d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -61,7 +98,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/perlin-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:perlin-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/perlin-2d-ex0.png]]
+:end:
+
 **** Function: *(perlin-3d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -77,7 +125,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/perlin-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:perlin-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/perlin-3d-ex0.png]]
+:end:
+
 **** Function: *(perlin-4d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -93,7 +152,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/perlin-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:perlin-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/perlin-4d-ex0.png]]
+:end:
+
 *** Simplex
 **** Function: *(simplex-1d &key seed)*
 ***** Description
@@ -110,7 +180,21 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+We encode the 1D noise into a 2D image by simply repeating the noise
+for each row.
+
+#+BEGIN_SRC lisp :var arg="img/api/simplex-1d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:simplex-1d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/simplex-1d-ex0.png]]
+:end:
+
 **** Function: *(simplex-2d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -126,7 +210,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/simplex-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:simplex-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/simplex-2d-ex0.png]]
+:end:
+
 **** Function: *(simplex-3d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -142,7 +237,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/simplex-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:simplex-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/simplex-3d-ex0.png]]
+:end:
+
 **** Function: *(simplex-4d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -158,7 +264,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/simplex-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:simplex-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/simplex-4d-ex0.png]]
+:end:
+
 *** Open-Simplex
 **** Function: *(open-simplex-2d &key seed)*
 ***** Description
@@ -175,7 +292,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex-2d-ex0.png]]
+:end:
+
 **** Function: *(open-simplex-3d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -191,7 +319,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex-3d-ex0.png]]
+:end:
+
 **** Function: *(open-simplex-4d &key seed)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -207,6 +346,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex-4d-ex0.png]]
+:end:
+
 TBD
 *** Open-Simplex 2F (Fast)
 **** Function: *(open-simplex2f-2d &key seed (orientation :standard))*
@@ -230,7 +381,18 @@ vertical (optional, default: `:standard`).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex2f-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex2f-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex2f-2d-ex0.png]]
+:end:
+
 **** Function: *(open-simplex2f-3d &key seed (orientation :standard))*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -252,6 +414,18 @@ default: `:standard`).
 #+end_example
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex2f-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex2f-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex2f-3d-ex0.png]]
+:end:
+
 TBD
 **** Function: *(open-simplex2f-4d &key seed (orientation :standard))*
 ***** Description
@@ -275,7 +449,18 @@ animations of 3D objects, where W is time (optional, default: `:standard`).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex2f-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex2f-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex2f-4d-ex0.png]]
+:end:
+
 *** Open-Simplex 2S (Smooth)
 **** Function: *(open-simplex2s-2d &key seed (orientation :standard))*
 ***** Description
@@ -298,6 +483,18 @@ vertical (optional, default: `:standard`).
 #+end_example
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex2s-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex2s-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex2s-2d-ex0.png]]
+:end:
+
 TBD
 **** Function: *(open-simplex2s-3d &key seed (orientation :standard))*
 ***** Description
@@ -320,6 +517,18 @@ default: `:standard`).
 #+end_example
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex2s-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex2s-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex2s-3d-ex0.png]]
+:end:
+
 TBD
 **** Function: *(open-simplex2s-4d &key seed (orientation :standard))*
 ***** Description
@@ -343,7 +552,18 @@ animations of 3D objects, where W is time (optional, default: `:standard`).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/open-simplex2s-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:open-simplex2s-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/open-simplex2s-4d-ex0.png]]
+:end:
+
 *** Value
 **** Function: *(value-2d &key seed)*
 ***** Description
@@ -360,6 +580,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/value-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:value-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/value-2d-ex0.png]]
+:end:
+
 TBD
 **** Function: *(value-3d &key seed)*
 ***** Description
@@ -376,6 +608,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/value-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:value-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/value-3d-ex0.png]]
+:end:
+
 TBD
 *** Cellular
 **** Function: *(cellular-2d &key seed (distance-method :euclidean) (output-type :f1) (jitter 1.0d0))*
@@ -404,6 +648,18 @@ away from their grid alignment (optional, default: 1.0).
 #+end_example
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/cellular-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:cellular-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/cellular-2d-ex0.png]]
+:end:
+
 TBD
 **** Function: *(cellular-3d &key seed (distance-method :euclidean) (output-type :f1) (jitter 1.0d0))*
 ***** Description
@@ -431,7 +687,17 @@ away from their grid alignment (optional, default: 1.0).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/cellular-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:cellular-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/cellular-3d-ex0.png]]
+:end:
 *** Cylinders
 **** Function: *(cylinders-3d &key seed (frequency 1.0d0))*
 ***** Description
@@ -451,6 +717,18 @@ TBD
 : (optional, default: 1.0).
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/cylinders-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:cylinders-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/cylinders-3d-ex0.png]]
+:end:
+
 TBD
 *** Spheres
 **** Function: *(spheres-3d &key seed (frequency 1.0d0))*
@@ -471,7 +749,18 @@ TBD
 : (optional, default: 1.0).
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/spheres-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:spheres-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/spheres-3d-ex0.png]]
+:end:
+
 *** Checker
 **** Function: *(checker-2d &key seed)*
 ***** Description
@@ -488,6 +777,18 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/checker-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:checker-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/checker-2d-ex0.png]]
+:end:
+
 TBD
 *** Constant
 **** Function: *(constant value &key seed)*
@@ -505,7 +806,21 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-TBD
+When rendering this to an image. 0 is black and 1 is white. So .5
+should be a middle grey color.
+
+#+BEGIN_SRC lisp :var arg="img/api/constant-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:constant .5 :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/constant-ex0.png]]
+:end:
+
 *** FBM: Fractal Brownian Motion
 **** Function: *(fbm-2d &key seed (generator #'cricket:open-simplex2f-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
@@ -540,7 +855,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/fbm-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:fbm-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/fbm-2d-ex0.png]]
+:end:
+
 **** Function: *(fbm-3d &key seed (generator #'cricket:open-simplex2f-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -574,7 +900,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/fbm-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:fbm-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/fbm-3d-ex0.png]]
+:end:
+
 **** Function: *(fbm-4d &key seed (generator #'cricket:open-simplex2f-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -608,7 +945,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/fbm-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:fbm-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/fbm-4d-ex0.png]]
+:end:
+
 *** Billow
 **** Function: *(billow-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
@@ -643,6 +991,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/billow-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:billow-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/billow-2d-ex0.png]]
+:end:
+
 TBD
 **** Function: *(billow-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
@@ -677,7 +1037,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/billow-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:billow-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/billow-3d-ex0.png]]
+:end:
+
 **** Function: *(billow-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
@@ -711,7 +1082,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/billow-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:billow-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/billow-4d-ex0.png]]
+:end:
+
 *** Multifractal
 **** Function: (*multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
@@ -746,6 +1128,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/multifractal-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:multifractal-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/multifractal-2d-ex0.png]]
+:end:
+
 TBD
 **** Function: (*multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
@@ -780,6 +1174,18 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
+#+BEGIN_SRC lisp :var arg="img/api/multifractal-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:multifractal-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/multifractal-3d-ex0.png]]
+:end:
+
 TBD
 **** Function: (*multifractal-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))*
 ***** Description
@@ -814,15 +1220,295 @@ octaves (optional, default 0.5).
 #+end_example
 
 ***** Example
-TBD
+#+BEGIN_SRC lisp :var arg="img/api/multifractal-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:multifractal-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/multifractal-4d-ex0.png]]
+:end:
+
 *** Hybrid-Multifractal
-**** hybrid-multifractal-2d
-**** hybrid-multifractal-3d
-**** hybrid-multifractal-4d
+**** Function: *(hybrid-multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.25))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:hybrid-multifractal-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+2-dimensional hybrid multifractal noise, using the supplied `generator` function to construct each
+octave's sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-2d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 0.25).
+#+end_example
+
+***** Example
+#+BEGIN_SRC lisp :var arg="img/api/hybrid-multifractal-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:hybrid-multifractal-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/hybrid-multifractal-2d-ex0.png]]
+:end:
+
+**** Function: *(hybrid-multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.25))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:hybrid-multifractal-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+3-dimensional hybrid multifractal noise, using the supplied `generator` function to construct each
+octave's sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-3d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 0.25).
+#+end_example
+
+***** Example
+#+BEGIN_SRC lisp :var arg="img/api/hybrid-multifractal-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:hybrid-multifractal-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/hybrid-multifractal-3d-ex0.png]]
+:end:
+**** Function: *(hybrid-multifractal-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.25))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:hybrid-multifractal-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+4-dimensional hybrid multifractal noise, using the supplied `generator` function to construct each
+octave's sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-4d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 0.25).
+#+end_example
+
+***** Example
+#+BEGIN_SRC lisp :var arg="img/api/hybrid-multifractal-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:hybrid-multifractal-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/hybrid-multifractal-4d-ex0.png]]
+:end:
+
 *** Ridged-Multifractal
-**** ridged-multifractal-2d
-**** ridged-multifractal-3d
-**** ridged-multifractal-4d
+**** Function: *(ridged-multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 1.0) (attenuation 2.0))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:ridged-multifractal-2d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+2-dimensional ridged multifractal noise, using the supplied `generator` function to construct each
+octave's sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-2d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 1.0).
+
+`attenuation`: The attenuation to apply to the weight of each octave (optional, default: 2.0).
+#+end_example
+
+***** Example
+#+BEGIN_SRC lisp :var arg="img/api/ridged-multifractal-2d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:ridged-multifractal-2d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/ridged-multifractal-2d-ex0.png]]
+:end:
+
+**** Function: *(ridged-multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 1.0) (attenuation 2.0))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:ridged-multifractal-3d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+3-dimensional ridged multifractal noise, using the supplied `generator` function to construct each
+octave's sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-3d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 1.0).
+
+`attenuation`: The attenuation to apply to the weight of each octave (optional, default: 2.0).
+#+end_example
+
+***** Example
+#+BEGIN_SRC lisp :var arg="img/api/ridged-multifractal-3d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:ridged-multifractal-3d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/ridged-multifractal-3d-ex0.png]]
+:end:
+
+**** Function: *(ridged-multifractal-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 1.0) (attenuation 2.0))*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:ridged-multifractal-4d 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+4-dimensional ridged multifractal noise, using the supplied `generator` function to construct each
+octave's sampler.
+
+`seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+supplied, one will be generated automatically which will negatively affect the reproducibility of
+the noise (optional, default: NIL).
+
+`generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+to construct a different sampler, each with a different seed, for each octave (optional, default
+`#'open-simplex2s-4d`).
+
+`octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+4).
+
+`frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+`lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+octaves (optional, default: 2.0).
+
+`persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+octaves (optional, default 1.0).
+
+`attenuation`: The attenuation to apply to the weight of each octave (optional, default: 2.0).
+#+end_example
+
+***** Example
+#+BEGIN_SRC lisp :var arg="img/api/ridged-multifractal-4d-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:ridged-multifractal-4d :seed "example")
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/ridged-multifractal-4d-ex0.png]]
+:end:
+
 ** Modifiers
 *** +
 *** -

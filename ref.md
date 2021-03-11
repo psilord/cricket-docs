@@ -1,37 +1,53 @@
-- [Cricket Introduction](#org6dc810e)
-- [Coherent Noise](#org3de4235)
-- [API](#org4d2aecd)
-  - [Generators](#org6ba9211)
-  - [Modifiers](#orgd02e2e5)
-  - [Map](#orgf2b8591)
-- [Glossary](#org5a6fba3)
-- [References](#org84ba63e)
-- [Prototyping](#orgecf9ba5)
-  - [Org Mode Code Block Examples](#org98d12d5)
-  - [Org Mode Wisdom](#orgcbd787a)
+- [Cricket Introduction](#org4f8d54e)
+- [Coherent Noise](#org3d79e4a)
+- [API](#org4e80abc)
+  - [Generators](#orgca01fdf)
+  - [Modifiers](#orgadf7718)
+  - [Map](#org66a7911)
+- [Glossary](#orga703bcc)
+- [References](#orgd4e1458)
+- [Prototyping](#org991599d)
+  - [Org Mode Code Block Examples](#org7f46856)
+  - [Org Mode Wisdom](#org24315f6)
 
 
 
-<a id="org6dc810e"></a>
+<a id="org4f8d54e"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org3de4235"></a>
+<a id="org3d79e4a"></a>
 
 # Coherent Noise
 
 
-<a id="org4d2aecd"></a>
+<a id="org4e80abc"></a>
 
 # API
 
+Cricket's API is split into three main pieces: Generators which generate a source signal of noise, Modifiers which mutate, combine, or otherwise alter a noise signal, and Maps which control how noise gets rendered to an in memory image (which can then be stored to disk).
 
-<a id="org6ba9211"></a>
+All of the examples show at least the simplest use of the noise function with no additional affects on it. Some examples may demonstrate additional effects in the parameter space of the functions.
+
+For all of these examples, for package brevity, assume that this piece of code has been run in your REPL:
+
+```lisp
+(ql:quickload :cricket)
+(defpackage #:my-package
+  (:local-nicknames (#:c #:cricket))
+  (:use #:cl))
+(in-package #:my-package)
+```
+
+
+<a id="orgca01fdf"></a>
 
 ## Generators
+
+The Generators are demonstrated with no modifications applied to the noise signal.
 
 
 ### Perlin
@@ -49,7 +65,16 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        We encode the 1D noise into a 2D image by simply repeating the noise for each row.
+
+        ```lisp
+        (c:-> (c:perlin-1d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/perlin-1d-ex0.png)
 
 2.  Function: **(perlin-2d &key seed)**
 
@@ -64,7 +89,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:perlin-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/perlin-2d-ex0.png)
 
 3.  Function: **(perlin-3d &key seed)**
 
@@ -79,7 +111,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:perlin-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/perlin-3d-ex0.png)
 
 4.  Function: **(perlin-4d &key seed)**
 
@@ -94,7 +133,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:perlin-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/perlin-4d-ex0.png)
 
 
 ### Simplex
@@ -112,7 +158,16 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        We encode the 1D noise into a 2D image by simply repeating the noise for each row.
+
+        ```lisp
+        (c:-> (c:simplex-1d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/simplex-1d-ex0.png)
 
 2.  Function: **(simplex-2d &key seed)**
 
@@ -127,7 +182,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:simplex-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/simplex-2d-ex0.png)
 
 3.  Function: **(simplex-3d &key seed)**
 
@@ -142,7 +204,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:simplex-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/simplex-3d-ex0.png)
 
 4.  Function: **(simplex-4d &key seed)**
 
@@ -157,7 +226,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:simplex-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/simplex-4d-ex0.png)
 
 
 ### Open-Simplex
@@ -175,7 +251,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:open-simplex-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex-2d-ex0.png)
 
 2.  Function: **(open-simplex-3d &key seed)**
 
@@ -190,7 +273,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:open-simplex-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex-3d-ex0.png)
 
 3.  Function: **(open-simplex-4d &key seed)**
 
@@ -204,6 +294,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
             the noise (optional, default: NIL).
 
     2.  Example
+
+        ```lisp
+        (c:-> (c:open-simplex-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex-4d-ex0.png)
 
         TBD
 
@@ -227,7 +326,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:open-simplex2f-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex2f-2d-ex0.png)
 
 2.  Function: **(open-simplex2f-3d &key seed (orientation :standard))**
 
@@ -245,6 +351,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
             default: `:standard`).
 
     2.  Example
+
+        ```lisp
+        (c:-> (c:open-simplex2f-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex2f-3d-ex0.png)
 
         TBD
 
@@ -266,7 +381,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:open-simplex2f-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex2f-4d-ex0.png)
 
 
 ### Open-Simplex 2S (Smooth)
@@ -288,6 +410,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
+        ```lisp
+        (c:-> (c:open-simplex2s-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex2s-2d-ex0.png)
+
         TBD
 
 2.  Function: **(open-simplex2s-3d &key seed (orientation :standard))**
@@ -306,6 +437,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
             default: `:standard`).
 
     2.  Example
+
+        ```lisp
+        (c:-> (c:open-simplex2s-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex2s-3d-ex0.png)
 
         TBD
 
@@ -327,7 +467,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:open-simplex2s-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/open-simplex2s-4d-ex0.png)
 
 
 ### Value
@@ -345,6 +492,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
+        ```lisp
+        (c:-> (c:value-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/value-2d-ex0.png)
+
         TBD
 
 2.  Function: **(value-3d &key seed)**
@@ -359,6 +515,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
             the noise (optional, default: NIL).
 
     2.  Example
+
+        ```lisp
+        (c:-> (c:value-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/value-3d-ex0.png)
 
         TBD
 
@@ -387,6 +552,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
+        ```lisp
+        (c:-> (c:cellular-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/cellular-2d-ex0.png)
+
         TBD
 
 2.  Function: **(cellular-3d &key seed (distance-method :euclidean) (output-type :f1) (jitter 1.0d0))**
@@ -411,7 +585,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:cellular-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/cellular-3d-ex0.png)
 
 
 ### Cylinders
@@ -431,6 +612,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
             (optional, default: 1.0).
 
     2.  Example
+
+        ```lisp
+        (c:-> (c:cylinders-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/cylinders-3d-ex0.png)
 
         TBD
 
@@ -453,7 +643,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:spheres-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/spheres-3d-ex0.png)
 
 
 ### Checker
@@ -470,6 +667,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
             the noise (optional, default: NIL).
 
     2.  Example
+
+        ```lisp
+        (c:-> (c:checker-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/checker-2d-ex0.png)
 
         TBD
 
@@ -489,7 +695,16 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        When rendering this to an image. 0 is black and 1 is white. So .5 should be a middle grey color.
+
+        ```lisp
+        (c:-> (c:constant .5 :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/constant-ex0.png)
 
 
 ### FBM: Fractal Brownian Motion
@@ -523,7 +738,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:fbm-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/fbm-2d-ex0.png)
 
 2.  Function: **(fbm-3d &key seed (generator #'cricket:open-simplex2f-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
 
@@ -554,7 +776,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:fbm-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/fbm-3d-ex0.png)
 
 3.  Function: **(fbm-4d &key seed (generator #'cricket:open-simplex2f-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
 
@@ -585,7 +814,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:fbm-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/fbm-4d-ex0.png)
 
 
 ### Billow
@@ -619,6 +855,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
+        ```lisp
+        (c:-> (c:billow-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/billow-2d-ex0.png)
+
         TBD
 
 2.  Function: **(billow-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
@@ -650,7 +895,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:billow-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/billow-3d-ex0.png)
 
 3.  Function: **(billow-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
 
@@ -681,7 +933,14 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:billow-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/billow-4d-ex0.png)
 
 
 ### Multifractal
@@ -715,6 +974,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
+        ```lisp
+        (c:-> (c:multifractal-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/multifractal-2d-ex0.png)
+
         TBD
 
 2.  Function: (**multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.5))**
@@ -745,6 +1013,15 @@ This document describes the `cricket` coherent noise library. It is in the proce
             octaves (optional, default 0.5).
 
     2.  Example
+
+        ```lisp
+        (c:-> (c:multifractal-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/multifractal-3d-ex0.png)
 
         TBD
 
@@ -777,28 +1054,257 @@ This document describes the `cricket` coherent noise library. It is in the proce
 
     2.  Example
 
-        TBD
+        ```lisp
+        (c:-> (c:multifractal-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/multifractal-4d-ex0.png)
 
 
 ### Hybrid-Multifractal
 
-1.  hybrid-multifractal-2d
+1.  Function: **(hybrid-multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.25))**
 
-2.  hybrid-multifractal-3d
+    1.  Description
 
-3.  hybrid-multifractal-4d
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            2-dimensional hybrid multifractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-2d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.25).
+
+    2.  Example
+
+        ```lisp
+        (c:-> (c:hybrid-multifractal-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/hybrid-multifractal-2d-ex0.png)
+
+2.  Function: **(hybrid-multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.25))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            3-dimensional hybrid multifractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-3d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.25).
+
+    2.  Example
+
+        ```lisp
+        (c:-> (c:hybrid-multifractal-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/hybrid-multifractal-3d-ex0.png)
+
+3.  Function: **(hybrid-multifractal-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.25))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            4-dimensional hybrid multifractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-4d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 0.25).
+
+    2.  Example
+
+        ```lisp
+        (c:-> (c:hybrid-multifractal-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/hybrid-multifractal-4d-ex0.png)
 
 
 ### Ridged-Multifractal
 
-1.  ridged-multifractal-2d
+1.  Function: **(ridged-multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 1.0) (attenuation 2.0))**
 
-2.  ridged-multifractal-3d
+    1.  Description
 
-3.  ridged-multifractal-4d
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            2-dimensional ridged multifractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 2-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-2d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 1.0).
+
+            `attenuation`: The attenuation to apply to the weight of each octave (optional, default: 2.0).
+
+    2.  Example
+
+        ```lisp
+        (c:-> (c:ridged-multifractal-2d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/ridged-multifractal-2d-ex0.png)
+
+2.  Function: **(ridged-multifractal-3d &key seed (generator #'cricket:open-simplex2s-3d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 1.0) (attenuation 2.0))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            3-dimensional ridged multifractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 3-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-3d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 1.0).
+
+            `attenuation`: The attenuation to apply to the weight of each octave (optional, default: 2.0).
+
+    2.  Example
+
+        ```lisp
+        (c:-> (c:ridged-multifractal-3d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/ridged-multifractal-3d-ex0.png)
+
+3.  Function: **(ridged-multifractal-4d &key seed (generator #'cricket:open-simplex2s-4d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 1.0) (attenuation 2.0))**
+
+    1.  Description
+
+            Construct a sampler that, when sampled, outputs the application of multiple octaves of a
+            4-dimensional ridged multifractal noise, using the supplied `generator` function to construct each
+            octave's sampler.
+
+            `seed`: A string used to seed the random number generator for this sampler, or NIL. If a seed is not
+            supplied, one will be generated automatically which will negatively affect the reproducibility of
+            the noise (optional, default: NIL).
+
+            `generator`: a function object pointing to one of the built-in 4-dimensional generators that is used
+            to construct a different sampler, each with a different seed, for each octave (optional, default
+            `#'open-simplex2s-4d`).
+
+            `octaves`: An integer between 1 and 32, denoting the number of octaves to apply (optional, default:
+            4).
+
+            `frequency`: The frequency of the first octave's signal (optional, default: 1.0).
+
+            `lacunarity`: A multiplier that determines how quickly the frequency increases for successive
+            octaves (optional, default: 2.0).
+
+            `persistence`: A multiplier that determines how quickly the amplitude diminishes for successive
+            octaves (optional, default 1.0).
+
+            `attenuation`: The attenuation to apply to the weight of each octave (optional, default: 2.0).
+
+    2.  Example
+
+        ```lisp
+        (c:-> (c:ridged-multifractal-4d :seed "example")
+          (c:make-map :width 256 :height 256)
+          (c:render-map)
+          (c:write-image arg))
+        ```
+
+        ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="orgd02e2e5"></a>
+<a id="orgadf7718"></a>
 
 ## Modifiers
 
@@ -872,7 +1378,7 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### uniform-scale
 
 
-<a id="orgf2b8591"></a>
+<a id="org66a7911"></a>
 
 ## Map
 
@@ -909,24 +1415,24 @@ This document describes the `cricket` coherent noise library. It is in the proce
 ### write-image
 
 
-<a id="org5a6fba3"></a>
+<a id="orga703bcc"></a>
 
 # Glossary
 
 
-<a id="org84ba63e"></a>
+<a id="orgd4e1458"></a>
 
 # References
 
 
-<a id="orgecf9ba5"></a>
+<a id="org991599d"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org98d12d5"></a>
+<a id="org7f46856"></a>
 
 ## Org Mode Code Block Examples
 
@@ -981,7 +1487,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgcbd787a"></a>
+<a id="org24315f6"></a>
 
 ## Org Mode Wisdom
 
