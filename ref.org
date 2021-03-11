@@ -1523,8 +1523,7 @@ resultat noise signal in order to rescale the output so it fits into the
 color range of the image. Otherwise, as minimal examples as possible are
 constructed.
 
-*** +
-**** Function: *(+ source1 source2)*
+*** Function: *(+ source1 source2)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
 (format t "~A" (documentation #'c:+ 'function)))
@@ -1555,7 +1554,7 @@ This example averages two noise sources together.
 :results:
 [[file:./img/api/plus-ex0.png]]
 :end:
-*** -
+*** Function: *(- source1 source2)*
 ***** Description
 #+BEGIN_SRC lisp :results output :exports results
 (format t "~A" (documentation #'c:- 'function)))
@@ -1570,11 +1569,9 @@ This example averages two noise sources together.
 : `source2`: The second input sampler (required).
 
 ***** Example
-TODO: Fix this example.
 #+BEGIN_SRC lisp :var arg="img/api/minus-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
 (c:-> (c:- (c:checker-2d :seed "example")
            (c:checker-2d :seed "example"))
-  (c:strengthen 1/2)
   (c:make-map :width 256 :height 256)
   (c:render-map)
   (c:write-image arg))
@@ -1585,6 +1582,53 @@ TODO: Fix this example.
 [[file:./img/api/minus-ex0.png]]
 :end:
 *** *
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:* 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs the result of multiplying the outputs of
+: `source1` and `source2`.
+:
+: `source1`: The first input sampler (required).
+:
+: `source2`: The second input sampler (required).
+***** Example
+The multiplication occurs in the [-1, 1] domain by default.
+
+#+BEGIN_SRC lisp :var arg="img/api/times-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:* (c:billow-2d :seed "example")
+           (c:checker-2d :seed "example"))
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/times-ex0.png]]
+:end:
+
+If you wanted to use the checker noise like a mask, you must rescale
+both noises into the [0, 1] domain, perform the multiplication
+there, and rescale it back to [-1, 1] domain.
+
+#+BEGIN_SRC lisp :var arg="img/api/times-ex1.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:* (c:-> (c:billow-2d :seed "example")
+             (c:strengthen 1/2 :bias .5))
+           (c:-> (c:checker-2d :seed "example")
+             (c:strengthen 1/2 :bias .5)))
+  (c:strengthen 2 :bias -1)
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/times-ex1.png]]
+:end:
 *** /
 *** abs
 *** blend

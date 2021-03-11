@@ -1,30 +1,30 @@
-- [Cricket Introduction](#orgbccaddb)
-- [Coherent Noise](#org81da200)
-- [API](#org35d2dad)
-  - [Generators](#org79edcfb)
-  - [Modifiers](#org22fa869)
-  - [Map](#org925b374)
-- [Glossary](#orgb568d5c)
-- [References](#org868c6a1)
-- [Prototyping](#org38f74ac)
-  - [Org Mode Code Block Examples](#orgaf01d14)
-  - [Org Mode Wisdom](#orgc8a28e0)
+- [Cricket Introduction](#org6e199b9)
+- [Coherent Noise](#orgfd8ca6b)
+- [API](#org9bf7b05)
+  - [Generators](#org0269d3f)
+  - [Modifiers](#org35a2228)
+  - [Map](#org6e6513e)
+- [Glossary](#org36ee383)
+- [References](#org8f47f00)
+- [Prototyping](#orga7f3f1a)
+  - [Org Mode Code Block Examples](#org1b307cd)
+  - [Org Mode Wisdom](#orgfb162df)
 
 
 
-<a id="orgbccaddb"></a>
+<a id="org6e199b9"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org81da200"></a>
+<a id="orgfd8ca6b"></a>
 
 # Coherent Noise
 
 
-<a id="org35d2dad"></a>
+<a id="org9bf7b05"></a>
 
 # API
 
@@ -43,7 +43,7 @@ For all of these examples, for package brevity, assume that this piece of code h
 ```
 
 
-<a id="org79edcfb"></a>
+<a id="org0269d3f"></a>
 
 ## Generators
 
@@ -1306,43 +1306,41 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="org22fa869"></a>
+<a id="org35a2228"></a>
 
 ## Modifiers
 
 Some of examples in these modifiers use `strengthen` in the resultat noise signal in order to rescale the output so it fits into the color range of the image. Otherwise, as minimal examples as possible are constructed.
 
 
-### +
+### Function: **(+ source1 source2)**
 
-1.  Function: **(+ source1 source2)**
+1.  Description
 
-    1.  Description
+        Construct a sampler that, when sampled, outputs the result of adding the outputs of `source1` and
+        `source2`.
 
-            Construct a sampler that, when sampled, outputs the result of adding the outputs of `source1` and
-            `source2`.
+        `source1`: The first input sampler (required).
 
-            `source1`: The first input sampler (required).
+        `source2`: The second input sampler (required).
 
-            `source2`: The second input sampler (required).
+2.  Example
 
-    2.  Example
+    This example averages two noise sources together.
 
-        This example averages two noise sources together.
+    ```lisp
+    (c:-> (c:+ (c:billow-2d :seed "example")
+               (c:checker-2d :seed "example"))
+      (c:strengthen 1/2)
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
 
-        ```lisp
-        (c:-> (c:+ (c:billow-2d :seed "example")
-                   (c:checker-2d :seed "example"))
-          (c:strengthen 1/2)
-          (c:make-map :width 256 :height 256)
-          (c:render-map)
-          (c:write-image arg))
-        ```
-
-        ![img](./img/api/plus-ex0.png)
+    ![img](./img/api/plus-ex0.png)
 
 
-### -
+### Function: **(- source1 source2)**
 
 1.  Description
 
@@ -1355,12 +1353,9 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 
 2.  Example
 
-    TODO: Fix this example.
-
     ```lisp
     (c:-> (c:- (c:checker-2d :seed "example")
                (c:checker-2d :seed "example"))
-      (c:strengthen 1/2)
       (c:make-map :width 256 :height 256)
       (c:render-map)
       (c:write-image arg))
@@ -1370,6 +1365,44 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 
 
 ### \*
+
+1.  Description
+
+        Construct a sampler that, when sampled, outputs the result of multiplying the outputs of
+        `source1` and `source2`.
+
+        `source1`: The first input sampler (required).
+
+        `source2`: The second input sampler (required).
+
+2.  Example
+
+    The multiplication occurs in the [-1, 1] domain by default.
+
+    ```lisp
+    (c:-> (c:* (c:billow-2d :seed "example")
+               (c:checker-2d :seed "example"))
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/times-ex0.png)
+
+    If you wanted to use the checker noise like a mask, you must rescale both noises into the [0, 1] domain, perform the multiplication there, and rescale it back to [-1, 1] domain.
+
+    ```lisp
+    (c:-> (c:* (c:-> (c:billow-2d :seed "example")
+                 (c:strengthen 1/2 :bias .5))
+               (c:-> (c:checker-2d :seed "example")
+                 (c:strengthen 1/2 :bias .5)))
+      (c:strengthen 2 :bias -1)
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/times-ex1.png)
 
 
 ### /
@@ -1432,7 +1465,7 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### uniform-scale
 
 
-<a id="org925b374"></a>
+<a id="org6e6513e"></a>
 
 ## Map
 
@@ -1469,24 +1502,24 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### write-image
 
 
-<a id="orgb568d5c"></a>
+<a id="org36ee383"></a>
 
 # Glossary
 
 
-<a id="org868c6a1"></a>
+<a id="org8f47f00"></a>
 
 # References
 
 
-<a id="org38f74ac"></a>
+<a id="orga7f3f1a"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="orgaf01d14"></a>
+<a id="org1b307cd"></a>
 
 ## Org Mode Code Block Examples
 
@@ -1541,7 +1574,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgc8a28e0"></a>
+<a id="orgfb162df"></a>
 
 ## Org Mode Wisdom
 
