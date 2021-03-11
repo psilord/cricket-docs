@@ -1,30 +1,30 @@
-- [Cricket Introduction](#orgb614b3b)
-- [Coherent Noise](#orgf8d53ba)
-- [API](#org74c8dba)
-  - [Generators](#org4ae2fe1)
-  - [Modifiers](#org723b4af)
-  - [Map](#orga4c6b61)
-- [Glossary](#org4fc89f4)
-- [References](#org8121497)
-- [Prototyping](#org5e7c06d)
-  - [Org Mode Code Block Examples](#orgbebcd1f)
-  - [Org Mode Wisdom](#org21450db)
+- [Cricket Introduction](#orgdb1d29b)
+- [Coherent Noise](#org0fda93f)
+- [API](#org1efad18)
+  - [Generators](#orga4f0bbe)
+  - [Modifiers](#org8d4c13f)
+  - [Map](#orgbbc3fc8)
+- [Glossary](#orga18a3be)
+- [References](#org3408cf5)
+- [Prototyping](#org18402be)
+  - [Org Mode Code Block Examples](#org86ede3a)
+  - [Org Mode Wisdom](#orgff7d73c)
 
 
 
-<a id="orgb614b3b"></a>
+<a id="orgdb1d29b"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="orgf8d53ba"></a>
+<a id="org0fda93f"></a>
 
 # Coherent Noise
 
 
-<a id="org74c8dba"></a>
+<a id="org1efad18"></a>
 
 # API
 
@@ -43,7 +43,7 @@ For all of these examples, for package brevity, assume that this piece of code h
 ```
 
 
-<a id="org4ae2fe1"></a>
+<a id="orga4f0bbe"></a>
 
 ## Generators
 
@@ -1306,7 +1306,7 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="org723b4af"></a>
+<a id="org8d4c13f"></a>
 
 ## Modifiers
 
@@ -1402,13 +1402,7 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
       (c:write-image arg))
     ```
 
-    <div class="org-center">
     ![img](./img/api/times-ex1.png)
-    </div>
-
-    <div class="org-center">
-    ![img](./img/api/times-ex1.png)
-    </div>
 
 
 ### /
@@ -1471,7 +1465,7 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### uniform-scale
 
 
-<a id="orga4c6b61"></a>
+<a id="orgbbc3fc8"></a>
 
 ## Map
 
@@ -1508,24 +1502,24 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### write-image
 
 
-<a id="org4fc89f4"></a>
+<a id="orga18a3be"></a>
 
 # Glossary
 
 
-<a id="org8121497"></a>
+<a id="org3408cf5"></a>
 
 # References
 
 
-<a id="org5e7c06d"></a>
+<a id="org18402be"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="orgbebcd1f"></a>
+<a id="org86ede3a"></a>
 
 ## Org Mode Code Block Examples
 
@@ -1580,7 +1574,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org21450db"></a>
+<a id="orgff7d73c"></a>
 
 ## Org Mode Wisdom
 
