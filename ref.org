@@ -1614,7 +1614,7 @@ If you wanted to use the checker noise like a mask, you must rescale
 both noises into the [0, 1] domain, perform the multiplication
 there, and rescale it back to [-1, 1] domain.
 
-#+BEGIN_SRC lisp :var arg="img/api/times-ex1.png" :post namestring(path=*this*) :results file drawer :exports both
+#+BEGIN_SRC lisp :var arg="img/api/times-ex1.png" :post namestring(path=*this*) :results file drawer :exports both :wrap CENTER
 (c:-> (c:* (c:-> (c:billow-2d :seed "example")
              (c:strengthen 1/2 :bias .5))
            (c:-> (c:checker-2d :seed "example")
@@ -1626,9 +1626,9 @@ there, and rescale it back to [-1, 1] domain.
 #+END_SRC
 
 #+RESULTS:
-:results:
+#+begin_CENTER
 [[file:./img/api/times-ex1.png]]
-:end:
+#+end_CENTER
 *** /
 *** abs
 *** blend
