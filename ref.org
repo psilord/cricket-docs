@@ -1630,9 +1630,146 @@ there, and rescale it back to [-1, 1] domain.
 [[file:./img/api/times-ex1.png]]
 :end:
 
-*** /
-*** abs
-*** blend
+*** Function: *(/ source1 source2)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:/ 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs the result of dividing the output `source1` by
+: the output of `source2`.
+:
+: `source1`: The first input sampler (required).
+:
+: `source2`: The second input sampler (required).
+***** Example
+The division occurs in the [-1, 1] domain by default.
+
+Any denominator which is zero will result in a
+zero result from the division.
+
+#+BEGIN_SRC lisp :var arg="img/api/div-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:/ (c:spheres-3d :seed "example")
+           (c:checker-2d :seed "example"))
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/div-ex0.png]]
+:end:
+
+If you want the division to be in terms of the black to white range,
+the sources and result must be normalized into the 0 to 1 domain
+to perform the processing there, and then converted back to the
+-1 to 1 domain afterwards.
+
+#+BEGIN_SRC lisp :var arg="img/api/div-ex1.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:/ (c:-> (c:spheres-3d :seed "example")
+             (c:strengthen 1/2 :bias .5))
+           (c:-> (c:checker-2d :seed "example")
+             (c:strengthen 1/2 :bias .5)))
+  (c:strengthen 2 :bias -1)
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/div-ex1.png]]
+:end:
+
+*** Function: *(abs source)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:abs 'function)))
+#+END_SRC
+
+#+RESULTS:
+: Construct a sampler that, when sampled, outputs the absolute value of the output of `source`.
+:
+: `source`: The input sampler (required).
+***** Example
+#+BEGIN_SRC lisp :var arg="img/api/abs-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:spheres-3d :seed "example")
+  (c:abs)
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/abs-ex0.png]]
+:end:
+*** Function: *(blend source1 source2 control)*
+***** Description
+#+BEGIN_SRC lisp :results output :exports results
+(format t "~A" (documentation #'c:blend 'function)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Construct a sampler that, when sampled, outputs a blend between the outputs of `source1` and
+`source2`, by means of a linear interpolation using the output value of `control` as the
+interpolation parameter.
+
+If the output of `control` is negative, the blended output is weighted towards the output of
+`source1`. If the output of `control` is positive, the blended output is weighted towards the output
+of `source2`.
+
+`source1`: The sampler to weight towards if the output of `control` is negative (required).
+
+`source2`: The sampler to weight towards if the output of `control` is positive (required).
+
+`control`: The sampler that determines the weight of the blending operation (required).
+#+end_example
+***** Example
+This example shows the control noise as being the checker-2d so
+in white areas of the checker we take 100% of the billow-2d and in
+the black portion of the checker we take 100% of the spheres-3d
+noise.
+#+BEGIN_SRC lisp :var arg="img/api/blend-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:blend (c:spheres-3d :seed "example")
+               (c:billow-2d :seed "example")
+               (c:checker-2d :seed "example"))
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/blend-ex0.png]]
+:end:
+
+In this example, we use a spheres-3d (see above) as the control
+noise that produces smooth values from -1 to 1. We see how when
+the sphere-3d values are near -1 (black) we choose the checker-2d
+pattern and when near 1 (white) we choose the billow-2d pattern.
+Any value in between interpolates from the checker-2d to the
+billow-2d noise.
+
+TODO: I believe c:blend has a bug, confim it. -psilord
+
+#+BEGIN_SRC lisp :var arg="img/api/blend-ex1.png" :post namestring(path=*this*) :results file drawer :exports both
+(c:-> (c:blend (c:checker-2d :seed "example")
+               (c:billow-2d :seed "example")
+               (c:spheres-3d :seed "example"))
+  (c:make-map :width 256 :height 256)
+  (c:render-map)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/api/blend-ex1.png]]
+:end:
+
 *** cache
 *** clamp
 *** curve
@@ -1701,7 +1838,12 @@ echo "Hello world"
 
 Example text.
 
-#+BEGIN_SRC lisp :var arg="img/proto/proto-1.png" :post namestring(path=*this*) :results file drawer :exports both
+;; #+HEADER: :dir ~/quicklisp/local-projects/cricket-docs/img/proto
+#+HEADER: :var arg="img/proto/proto-1.png"
+#+HEADER: :post namestring(path=*this*)
+#+HEADER: :results file drawer
+#+HEADER: :exports both
+#+BEGIN_SRC lisp
 (c:-> (c:perlin-3d :seed "example")
   (c:uniform-scale 1.5)
   (c:fractalize :fbm :frequency 1.3 :octaves 6 :lacunarity 3 :persistence 0.22)
@@ -1750,6 +1892,7 @@ This is a pure hack that suffices for this one use case so I can develop
 these docs with a fast workflow.
 
 #+END_COMMENT
+
 #+NAME: namestring
 #+BEGIN_SRC lisp :var path="" :results output :exports none
 (block hack

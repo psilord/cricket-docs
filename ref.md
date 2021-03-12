@@ -1,30 +1,30 @@
-- [Cricket Introduction](#orgdb1d29b)
-- [Coherent Noise](#org0fda93f)
-- [API](#org1efad18)
-  - [Generators](#orga4f0bbe)
-  - [Modifiers](#org8d4c13f)
-  - [Map](#orgbbc3fc8)
-- [Glossary](#orga18a3be)
-- [References](#org3408cf5)
-- [Prototyping](#org18402be)
-  - [Org Mode Code Block Examples](#org86ede3a)
-  - [Org Mode Wisdom](#orgff7d73c)
+- [Cricket Introduction](#orgfeb334d)
+- [Coherent Noise](#org1ecd092)
+- [API](#orge3955c3)
+  - [Generators](#org6a411c2)
+  - [Modifiers](#orgf1494de)
+  - [Map](#org0a8e60c)
+- [Glossary](#org53b5c23)
+- [References](#org7f83cb0)
+- [Prototyping](#orga12cc2a)
+  - [Org Mode Code Block Examples](#org1adde6b)
+  - [Org Mode Wisdom](#org013e2c3)
 
 
 
-<a id="orgdb1d29b"></a>
+<a id="orgfeb334d"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org0fda93f"></a>
+<a id="org1ecd092"></a>
 
 # Coherent Noise
 
 
-<a id="org1efad18"></a>
+<a id="orge3955c3"></a>
 
 # API
 
@@ -43,7 +43,7 @@ For all of these examples, for package brevity, assume that this piece of code h
 ```
 
 
-<a id="orga4f0bbe"></a>
+<a id="org6a411c2"></a>
 
 ## Generators
 
@@ -1306,11 +1306,11 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="org8d4c13f"></a>
+<a id="orgf1494de"></a>
 
 ## Modifiers
 
-Some of examples in these modifiers use `strengthen` in the resultat noise signal in order to rescale the output so it fits into the color range of the image. Otherwise, as minimal examples as possible are constructed.
+Some of examples in these modifiers use `strengthen` in the resultant noise signal in order to rescale the output so it fits into the color range of the image. Otherwise, as minimal examples as possible are constructed.
 
 
 ### Function: **(+ source1 source2)**
@@ -1405,13 +1405,117 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
     ![img](./img/api/times-ex1.png)
 
 
-### /
+### Function: **(/ source1 source2)**
+
+1.  Description
+
+        Construct a sampler that, when sampled, outputs the result of dividing the output `source1` by
+        the output of `source2`.
+
+        `source1`: The first input sampler (required).
+
+        `source2`: The second input sampler (required).
+
+2.  Example
+
+    The division occurs in the [-1, 1] domain by default.
+
+    Any denominator which is zero will result in a zero result from the division.
+
+    ```lisp
+    (c:-> (c:/ (c:spheres-3d :seed "example")
+               (c:checker-2d :seed "example"))
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/div-ex0.png)
+
+    If you want the division to be in terms of the black to white range, the sources and result must be normalized into the 0 to 1 domain to perform the processing there, and then converted back to the -1 to 1 domain afterwards.
+
+    ```lisp
+    (c:-> (c:/ (c:-> (c:spheres-3d :seed "example")
+                 (c:strengthen 1/2 :bias .5))
+               (c:-> (c:checker-2d :seed "example")
+                 (c:strengthen 1/2 :bias .5)))
+      (c:strengthen 2 :bias -1)
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/div-ex1.png)
 
 
-### abs
+### Function: **(abs source)**
+
+1.  Description
+
+        Construct a sampler that, when sampled, outputs the absolute value of the output of `source`.
+
+        `source`: The input sampler (required).
+
+2.  Example
+
+    ```lisp
+    (c:-> (c:spheres-3d :seed "example")
+      (c:abs)
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/abs-ex0.png)
 
 
-### blend
+### Function: **(blend source1 source2 control)**
+
+1.  Description
+
+        Construct a sampler that, when sampled, outputs a blend between the outputs of `source1` and
+        `source2`, by means of a linear interpolation using the output value of `control` as the
+        interpolation parameter.
+
+        If the output of `control` is negative, the blended output is weighted towards the output of
+        `source1`. If the output of `control` is positive, the blended output is weighted towards the output
+        of `source2`.
+
+        `source1`: The sampler to weight towards if the output of `control` is negative (required).
+
+        `source2`: The sampler to weight towards if the output of `control` is positive (required).
+
+        `control`: The sampler that determines the weight of the blending operation (required).
+
+2.  Example
+
+    This example shows the control noise as being the checker-2d so in white areas of the checker we take 100% of the billow-2d and in the black portion of the checker we take 100% of the spheres-3d noise.
+
+    ```lisp
+    (c:-> (c:blend (c:spheres-3d :seed "example")
+                   (c:billow-2d :seed "example")
+                   (c:checker-2d :seed "example"))
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/blend-ex0.png)
+
+    In this example, we use a spheres-3d (see above) as the control noise that produces smooth values from -1 to 1. We see how when the sphere-3d values are near -1 (black) we choose the checker-2d pattern and when near 1 (white) we choose the billow-2d pattern. Any value in between interpolates from the checker-2d to the billow-2d noise.
+
+    TODO: I believe c:blend has a bug, confim it. -psilord
+
+    ```lisp
+    (c:-> (c:blend (c:checker-2d :seed "example")
+                   (c:billow-2d :seed "example")
+                   (c:spheres-3d :seed "example"))
+      (c:make-map :width 256 :height 256)
+      (c:render-map)
+      (c:write-image arg))
+    ```
+
+    ![img](./img/api/blend-ex1.png)
 
 
 ### cache
@@ -1465,7 +1569,7 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### uniform-scale
 
 
-<a id="orgbbc3fc8"></a>
+<a id="org0a8e60c"></a>
 
 ## Map
 
@@ -1502,24 +1606,24 @@ Some of examples in these modifiers use `strengthen` in the resultat noise signa
 ### write-image
 
 
-<a id="orga18a3be"></a>
+<a id="org53b5c23"></a>
 
 # Glossary
 
 
-<a id="org3408cf5"></a>
+<a id="org7f83cb0"></a>
 
 # References
 
 
-<a id="org18402be"></a>
+<a id="orga12cc2a"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org86ede3a"></a>
+<a id="org1adde6b"></a>
 
 ## Org Mode Code Block Examples
 
@@ -1550,6 +1654,8 @@ echo "Hello world"
 
 Example text.
 
+;; #+HEADER: :dir ~/quicklisp/local-projects/cricket-docs/img/proto
+
 ```lisp
 (c:-> (c:perlin-3d :seed "example")
   (c:uniform-scale 1.5)
@@ -1574,7 +1680,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgff7d73c"></a>
+<a id="org013e2c3"></a>
 
 ## Org Mode Wisdom
 
