@@ -1,30 +1,30 @@
-- [Cricket Introduction](#orgfeb334d)
-- [Coherent Noise](#org1ecd092)
-- [API](#orge3955c3)
-  - [Generators](#org6a411c2)
-  - [Modifiers](#orgf1494de)
-  - [Map](#org0a8e60c)
-- [Glossary](#org53b5c23)
-- [References](#org7f83cb0)
-- [Prototyping](#orga12cc2a)
-  - [Org Mode Code Block Examples](#org1adde6b)
-  - [Org Mode Wisdom](#org013e2c3)
+- [Cricket Introduction](#org8fbf545)
+- [Coherent Noise](#org12a16d3)
+- [API](#org910c585)
+  - [Generators](#orgf7f728e)
+  - [Modifiers](#orga7a6d2b)
+  - [Map](#org76506df)
+- [Glossary](#orgb2915e9)
+- [References](#orgce5755a)
+- [Prototyping](#orgf13b883)
+  - [Org Mode Code Block Examples](#org49ebb83)
+  - [Org Mode Wisdom](#orgc9c11e6)
 
 
 
-<a id="orgfeb334d"></a>
+<a id="org8fbf545"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org1ecd092"></a>
+<a id="org12a16d3"></a>
 
 # Coherent Noise
 
 
-<a id="orge3955c3"></a>
+<a id="org910c585"></a>
 
 # API
 
@@ -43,7 +43,7 @@ For all of these examples, for package brevity, assume that this piece of code h
 ```
 
 
-<a id="org6a411c2"></a>
+<a id="orgf7f728e"></a>
 
 ## Generators
 
@@ -695,12 +695,10 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
     2.  Example
 
-        The value is a coefficient between 0 and 1 that represents a linearly inerpolated value from -1 to 1. It is this interpolated value that is emitted by the constant function.
-
-        In this example, the .5 value actually means to emit a constant value halfway from -1 to 1, which is 0 in the range -1 to 1. Then, render-map will rescale this to fit into the color gamut, resulting in a color that is (red: .5, green: .5, blue: .5). Be aware of the remapping of ranges with this function.
+        We get gray with this result because the constant 0 is in the middle between -1 which is black, and 1, which is white.
 
         ```lisp
-        (c:-> (c:constant .5 :seed "example")
+        (c:-> (c:constant 0 :seed "example")
           (c:make-map :width 256 :height 256)
           (c:render-map)
           (c:write-image arg))
@@ -1306,7 +1304,7 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="orgf1494de"></a>
+<a id="orga7a6d2b"></a>
 
 ## Modifiers
 
@@ -1569,7 +1567,7 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
 ### uniform-scale
 
 
-<a id="org0a8e60c"></a>
+<a id="org76506df"></a>
 
 ## Map
 
@@ -1606,24 +1604,24 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
 ### write-image
 
 
-<a id="org53b5c23"></a>
+<a id="orgb2915e9"></a>
 
 # Glossary
 
 
-<a id="org7f83cb0"></a>
+<a id="orgce5755a"></a>
 
 # References
 
 
-<a id="orga12cc2a"></a>
+<a id="orgf13b883"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org1adde6b"></a>
+<a id="org49ebb83"></a>
 
 ## Org Mode Code Block Examples
 
@@ -1643,8 +1641,7 @@ echo "Hello world"
 
 ```lisp
 (c:-> (c:checker-2d :seed "example")
-  ;;(c:uniform-scale 1/4)
-  (c:fractalize :fbm :octaves 3)
+  (c:fractalize :fbm :octaves 5)
   (c:make-map :width 256 :height 256)
   (c:render-map)
   (c:write-image arg))
@@ -1668,6 +1665,55 @@ Example text.
 
 ![img](./img/proto/proto-1.png)
 
+```lisp
+(c:define-gradient (wood)
+  (-1 (189 94 4 255))
+  (0.5 (144 48 6 255))
+  (1.0 (60 10 8 255)))
+
+(c:-> (c:+ (c:cylinders-3d :seed "a" :frequency 16)
+           (c:-> (c:multifractal-3d :seed "a" :frequency 48 :lacunarity 2.20703125 :octaves 3)
+             (c:scale :z 4)
+             (c:strengthen 0.25 :bias 0.125)))
+  (c:turbulence (c:perlin-3d :seed "a") :frequency 4 :power (/ 256) :roughness 4)
+  (c:translate :y 1.48)
+  (c:rotate :x 1.46607)
+  (c:turbulence (c:perlin-3d :seed "a") :frequency 2 :power (/ 64) :roughness 4)
+  (c:rotate :z pi)
+  (c:make-map :width 256 :height 256)
+  (c:render-map :gradient 'wood)
+  (c:write-image arg))
+```
+
+![img](./img/proto/proto-2.png)
+
+```lisp
+(c:define-gradient (jade)
+  (-1 (24 146 102 255))
+  (0 (78 154 115 255))
+  (0.25 (128 204 165 255))
+  (0.375 (78 154 115 255))
+  (1 (29 135 102 255)))
+
+(c:-> (c:+ (c:ridged-multifractal-3d :seed "a" :octaves 6 :frequency 2 :lacunarity 2.20703125)
+           (c:-> (c:cylinders-3d :seed "a" :frequency 2)
+             (c:rotate :x 1.570796 :y 0.436332 :z 0.087266)
+             (c:turbulence (c:perlin-3d :seed "a")
+                           :frequency 4
+                           :power (/ 4)
+                           :roughness 4)
+             (c:strengthen 0.25)))
+  (c:turbulence (c:perlin-3d :seed "a")
+                :frequency 4
+                :power (/ 16)
+                :roughness 2)
+  (c:make-map :width 256 :height 256 :x-min -5 :x-max 5 :y-min -5 :y-max 5)
+  (c:render-map :gradient 'jade)
+  (c:write-image arg))
+```
+
+![img](./img/proto/proto-3.png)
+
 Documentation retrival test:
 
 **(perlin-2d &key seed)**
@@ -1680,7 +1726,7 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="org013e2c3"></a>
+<a id="orgc9c11e6"></a>
 
 ## Org Mode Wisdom
 
