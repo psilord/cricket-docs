@@ -19,9 +19,9 @@ all docstrings.
 4. C-c C-e g g will emit a github style markdown.
 
 5. Ensure to save everything and commit all changed files, even images.
-#+END_COMMENT
 
 #+OPTIONS: toc:2
+#+END_COMMENT
 
 * Cricket Introduction
 This document describes the ~cricket~ coherent noise library. It is in the

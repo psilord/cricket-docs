@@ -1,30 +1,79 @@
-- [Cricket Introduction](#org8fbf545)
-- [Coherent Noise](#org12a16d3)
-- [API](#org910c585)
-  - [Generators](#orgf7f728e)
-  - [Modifiers](#orga7a6d2b)
-  - [Map](#org76506df)
-- [Glossary](#orgb2915e9)
-- [References](#orgce5755a)
-- [Prototyping](#orgf13b883)
-  - [Org Mode Code Block Examples](#org49ebb83)
-  - [Org Mode Wisdom](#orgc9c11e6)
+- [Cricket Introduction](#org6930de0)
+- [Coherent Noise](#orgece53af)
+- [API](#org893d4e5)
+  - [Generators](#org86f57c7)
+    - [Perlin](#org4d2480e)
+    - [Simplex](#orgb030a34)
+    - [Open-Simplex](#orgf967dad)
+    - [Open-Simplex 2F (Fast)](#orgbadb0cb)
+    - [Open-Simplex 2S (Smooth)](#org42b46ca)
+    - [Value](#org36d55ec)
+    - [Cellular](#orge90a9b4)
+    - [Cylinders](#orgd60885b)
+    - [Spheres](#org24708e9)
+    - [Checker](#orgeb46ca7)
+    - [Constant](#org7f6867e)
+    - [FBM: Fractal Brownian Motion](#orgac81b4e)
+    - [Billow](#org325e3a9)
+    - [Multifractal](#org810d1df)
+    - [Hybrid-Multifractal](#orgf7d9fd7)
+    - [Ridged-Multifractal](#org7693ea9)
+  - [Modifiers](#org552292c)
+    - [Function: **(+ source1 source2)**](#org3bf19a2)
+    - [Function: **(- source1 source2)**](#orgb9cb987)
+    - [Function: **(\*** **source1 source2)**](#org5845394)
+    - [Function: **(/ source1 source2)**](#org246edd7)
+    - [Function: **(abs source)**](#org91190ed)
+    - [Function: **(blend source1 source2 control)**](#org625bcf5)
+    - [cache](#org2c053c2)
+    - [clamp](#orga46b98d)
+    - [curve](#org88356b3)
+    - [displace](#orgea87ebd)
+    - [expt](#org12c76e4)
+    - [fractalize](#orgb205f43)
+    - [max](#org2e60806)
+    - [negate](#org24686d1)
+    - [power](#org20556cc)
+    - [rotate](#orgd7715e0)
+    - [scale](#org49ea366)
+    - [select](#org6d3ad49)
+    - [strengthen](#orgc5eee24)
+    - [terrace](#org7c1f07f)
+    - [translate](#org54e3b4c)
+    - [turbulance](#org6d17bc3)
+    - [uniform-scale](#org849107d)
+  - [Map](#orgafbcba4)
+    - [define-gradient](#org7bfcd95)
+    - [get-image-pixel](#org687de69)
+    - [image](#org96722f6)
+    - [make-map](#orgbbe0d05)
+    - [render-map](#org9273da5)
+    - [write-image](#org10e6459)
+- [Glossary](#orge1cc014)
+- [References](#org027d79e)
+- [Prototyping](#orgac16fa8)
+  - [Org Mode Code Block Examples](#org71b7d8a)
+  - [Org Mode Wisdom](#orgd1349db)
+    - [<https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf>](#org4e02c8e)
+    - [<https://orgmode.org/worg/orgcard.html>](#org6999dea)
+    - [<https://orgmode.org/manual/Variable-Index.html>](#org4f737b4)
+    - [C-c C-x C-v - org-toggle-inline-images](#org18b6192)
+    - [C-c C-v b - org-babel-execute-buffer.](#org3a89303)
 
 
-
-<a id="org8fbf545"></a>
+<a id="org6930de0"></a>
 
 # Cricket Introduction
 
 This document describes the `cricket` coherent noise library. It is in the process of being written.
 
 
-<a id="org12a16d3"></a>
+<a id="orgece53af"></a>
 
 # Coherent Noise
 
 
-<a id="org910c585"></a>
+<a id="org893d4e5"></a>
 
 # API
 
@@ -43,12 +92,14 @@ For all of these examples, for package brevity, assume that this piece of code h
 ```
 
 
-<a id="orgf7f728e"></a>
+<a id="org86f57c7"></a>
 
 ## Generators
 
 The Generators are demonstrated with no modifications applied to the noise signal.
 
+
+<a id="org4d2480e"></a>
 
 ### Perlin
 
@@ -143,6 +194,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/perlin-4d-ex0.png)
 
 
+<a id="orgb030a34"></a>
+
 ### Simplex
 
 1.  Function: **(simplex-1d &key seed)**
@@ -236,6 +289,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/simplex-4d-ex0.png)
 
 
+<a id="orgf967dad"></a>
+
 ### Open-Simplex
 
 1.  Function: **(open-simplex-2d &key seed)**
@@ -306,6 +361,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
         TBD
 
+
+<a id="orgbadb0cb"></a>
 
 ### Open-Simplex 2F (Fast)
 
@@ -390,6 +447,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
         ![img](./img/api/open-simplex2f-4d-ex0.png)
 
+
+<a id="org42b46ca"></a>
 
 ### Open-Simplex 2S (Smooth)
 
@@ -477,6 +536,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/open-simplex2s-4d-ex0.png)
 
 
+<a id="org36d55ec"></a>
+
 ### Value
 
 1.  Function: **(value-2d &key seed)**
@@ -527,6 +588,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
         TBD
 
+
+<a id="orge90a9b4"></a>
 
 ### Cellular
 
@@ -595,6 +658,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/cellular-3d-ex0.png)
 
 
+<a id="orgd60885b"></a>
+
 ### Cylinders
 
 1.  Function: **(cylinders-3d &key seed (frequency 1.0d0))**
@@ -625,6 +690,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         TBD
 
 
+<a id="org24708e9"></a>
+
 ### Spheres
 
 1.  Function: **(spheres-3d &key seed (frequency 1.0d0))**
@@ -653,6 +720,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/spheres-3d-ex0.png)
 
 
+<a id="orgeb46ca7"></a>
+
 ### Checker
 
 1.  Function: **(checker-2d &key seed)**
@@ -680,6 +749,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         TBD
 
 
+<a id="org7f6867e"></a>
+
 ### Constant
 
 1.  Function: **(constant value &key seed)**
@@ -706,6 +777,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
         ![img](./img/api/constant-ex0.png)
 
+
+<a id="orgac81b4e"></a>
 
 ### FBM: Fractal Brownian Motion
 
@@ -823,6 +896,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
         ![img](./img/api/fbm-4d-ex0.png)
 
+
+<a id="org325e3a9"></a>
 
 ### Billow
 
@@ -942,6 +1017,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
         ![img](./img/api/billow-4d-ex0.png)
 
+
+<a id="org810d1df"></a>
 
 ### Multifractal
 
@@ -1064,6 +1141,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/multifractal-4d-ex0.png)
 
 
+<a id="orgf7d9fd7"></a>
+
 ### Hybrid-Multifractal
 
 1.  Function: **(hybrid-multifractal-2d &key seed (generator #'cricket:open-simplex2s-2d) (octaves 4) (frequency 1.0) (lacunarity 2.0) (persistence 0.25))**
@@ -1180,6 +1259,8 @@ The Generators are demonstrated with no modifications applied to the noise signa
 
         ![img](./img/api/hybrid-multifractal-4d-ex0.png)
 
+
+<a id="org7693ea9"></a>
 
 ### Ridged-Multifractal
 
@@ -1304,12 +1385,14 @@ The Generators are demonstrated with no modifications applied to the noise signa
         ![img](./img/api/ridged-multifractal-4d-ex0.png)
 
 
-<a id="orga7a6d2b"></a>
+<a id="org552292c"></a>
 
 ## Modifiers
 
 Some of examples in these modifiers use `strengthen` in the resultant noise signal in order to rescale the output so it fits into the color range of the image. Otherwise, as minimal examples as possible are constructed.
 
+
+<a id="org3bf19a2"></a>
 
 ### Function: **(+ source1 source2)**
 
@@ -1338,6 +1421,8 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
     ![img](./img/api/plus-ex0.png)
 
 
+<a id="orgb9cb987"></a>
+
 ### Function: **(- source1 source2)**
 
 1.  Description
@@ -1361,6 +1446,8 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
 
     ![img](./img/api/minus-ex0.png)
 
+
+<a id="org5845394"></a>
 
 ### Function: **(\*** **source1 source2)**
 
@@ -1402,6 +1489,8 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
 
     ![img](./img/api/times-ex1.png)
 
+
+<a id="org246edd7"></a>
 
 ### Function: **(/ source1 source2)**
 
@@ -1446,6 +1535,8 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
     ![img](./img/api/div-ex1.png)
 
 
+<a id="org91190ed"></a>
+
 ### Function: **(abs source)**
 
 1.  Description
@@ -1466,6 +1557,8 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
 
     ![img](./img/api/abs-ex0.png)
 
+
+<a id="org625bcf5"></a>
 
 ### Function: **(blend source1 source2 control)**
 
@@ -1516,67 +1609,107 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
     ![img](./img/api/blend-ex1.png)
 
 
+<a id="org2c053c2"></a>
+
 ### cache
 
+
+<a id="orga46b98d"></a>
 
 ### clamp
 
 
+<a id="org88356b3"></a>
+
 ### curve
 
+
+<a id="orgea87ebd"></a>
 
 ### displace
 
 
+<a id="org12c76e4"></a>
+
 ### expt
 
+
+<a id="orgb205f43"></a>
 
 ### fractalize
 
 
+<a id="org2e60806"></a>
+
 ### max
 
+
+<a id="org24686d1"></a>
 
 ### negate
 
 
+<a id="org20556cc"></a>
+
 ### power
 
+
+<a id="orgd7715e0"></a>
 
 ### rotate
 
 
+<a id="org49ea366"></a>
+
 ### scale
 
+
+<a id="org6d3ad49"></a>
 
 ### select
 
 
+<a id="orgc5eee24"></a>
+
 ### strengthen
 
+
+<a id="org7c1f07f"></a>
 
 ### terrace
 
 
+<a id="org54e3b4c"></a>
+
 ### translate
 
+
+<a id="org6d17bc3"></a>
 
 ### turbulance
 
 
+<a id="org849107d"></a>
+
 ### uniform-scale
 
 
-<a id="org76506df"></a>
+<a id="orgafbcba4"></a>
 
 ## Map
 
 
+<a id="org7bfcd95"></a>
+
 ### define-gradient
 
 
+<a id="org687de69"></a>
+
 ### get-image-pixel
 
+
+<a id="org96722f6"></a>
 
 ### image
 
@@ -1586,6 +1719,8 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
 
 3.  image-data
 
+
+<a id="orgbbe0d05"></a>
 
 ### make-map
 
@@ -1598,30 +1733,34 @@ Some of examples in these modifiers use `strengthen` in the resultant noise sign
 4.  map-width
 
 
+<a id="org9273da5"></a>
+
 ### render-map
 
+
+<a id="org10e6459"></a>
 
 ### write-image
 
 
-<a id="orgb2915e9"></a>
+<a id="orge1cc014"></a>
 
 # Glossary
 
 
-<a id="orgce5755a"></a>
+<a id="org027d79e"></a>
 
 # References
 
 
-<a id="orgf13b883"></a>
+<a id="orgac16fa8"></a>
 
 # Prototyping
 
 Remove this entire section when the org more docs are complete.
 
 
-<a id="org49ebb83"></a>
+<a id="org71b7d8a"></a>
 
 ## Org Mode Code Block Examples
 
@@ -1726,24 +1865,34 @@ Documentation retrival test:
     the noise (optional, default: NIL).
 
 
-<a id="orgc9c11e6"></a>
+<a id="orgd1349db"></a>
 
 ## Org Mode Wisdom
 
 
+<a id="org4e02c8e"></a>
+
 ### <https://www.gnu.org/software/emacs/refcards/pdf/orgcard.pdf>
 
+
+<a id="org6999dea"></a>
 
 ### <https://orgmode.org/worg/orgcard.html>
 
 
+<a id="org4f737b4"></a>
+
 ### <https://orgmode.org/manual/Variable-Index.html>
 
+
+<a id="org18b6192"></a>
 
 ### C-c C-x C-v - org-toggle-inline-images
 
 Used to toggle all inline images on and off.
 
+
+<a id="org3a89303"></a>
 
 ### C-c C-v b - org-babel-execute-buffer.
 
