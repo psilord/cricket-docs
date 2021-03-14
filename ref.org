@@ -806,18 +806,11 @@ TBD
 : the noise (optional, default: NIL).
 
 ***** Example
-The value is a coefficient between 0 and 1 that represents a linearly
-inerpolated value from -1 to 1. It is this interpolated value that
-is emitted by the constant function.
-
-In this example, the .5 value actually means to emit a
-constant value halfway from -1 to 1, which is 0 in the range -1 to 1.
-Then, render-map will rescale this to fit into the color gamut,
-resulting in a color that is (red: .5, green: .5, blue: .5). Be aware
-of the remapping of ranges with this function.
+We get gray with this result because the constant 0 is in the middle
+between -1 which is black, and 1, which is white.
 
 #+BEGIN_SRC lisp :var arg="img/api/constant-ex0.png" :post namestring(path=*this*) :results file drawer :exports both
-(c:-> (c:constant .5 :seed "example")
+(c:-> (c:constant 0 :seed "example")
   (c:make-map :width 256 :height 256)
   (c:render-map)
   (c:write-image arg))
@@ -1824,8 +1817,7 @@ echo "Hello world"
 
 #+BEGIN_SRC lisp :var arg="img/proto/proto-0.png" :post namestring(path=*this*) :results file drawer :exports both
 (c:-> (c:checker-2d :seed "example")
-  ;;(c:uniform-scale 1/4)
-  (c:fractalize :fbm :octaves 3)
+  (c:fractalize :fbm :octaves 5)
   (c:make-map :width 256 :height 256)
   (c:render-map)
   (c:write-image arg))
@@ -1856,6 +1848,71 @@ Example text.
 #+RESULTS:
 :results:
 [[file:./img/proto/proto-1.png]]
+:end:
+
+
+#+HEADER: :var arg="img/proto/proto-2.png"
+#+HEADER: :post namestring(path=*this*)
+#+HEADER: :results file drawer
+#+HEADER: :exports both
+#+BEGIN_SRC lisp
+(c:define-gradient (wood)
+  (-1 (189 94 4 255))
+  (0.5 (144 48 6 255))
+  (1.0 (60 10 8 255)))
+
+(c:-> (c:+ (c:cylinders-3d :seed "a" :frequency 16)
+           (c:-> (c:multifractal-3d :seed "a" :frequency 48 :lacunarity 2.20703125 :octaves 3)
+             (c:scale :z 4)
+             (c:strengthen 0.25 :bias 0.125)))
+  (c:turbulence (c:perlin-3d :seed "a") :frequency 4 :power (/ 256) :roughness 4)
+  (c:translate :y 1.48)
+  (c:rotate :x 1.46607)
+  (c:turbulence (c:perlin-3d :seed "a") :frequency 2 :power (/ 64) :roughness 4)
+  (c:rotate :z pi)
+  (c:make-map :width 256 :height 256)
+  (c:render-map :gradient 'wood)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/proto/proto-2.png]]
+:end:
+
+
+#+HEADER: :var arg="img/proto/proto-3.png"
+#+HEADER: :post namestring(path=*this*)
+#+HEADER: :results file drawer
+#+HEADER: :exports both
+#+BEGIN_SRC lisp
+(c:define-gradient (jade)
+  (-1 (24 146 102 255))
+  (0 (78 154 115 255))
+  (0.25 (128 204 165 255))
+  (0.375 (78 154 115 255))
+  (1 (29 135 102 255)))
+
+(c:-> (c:+ (c:ridged-multifractal-3d :seed "a" :octaves 6 :frequency 2 :lacunarity 2.20703125)
+           (c:-> (c:cylinders-3d :seed "a" :frequency 2)
+             (c:rotate :x 1.570796 :y 0.436332 :z 0.087266)
+             (c:turbulence (c:perlin-3d :seed "a")
+                           :frequency 4
+                           :power (/ 4)
+                           :roughness 4)
+             (c:strengthen 0.25)))
+  (c:turbulence (c:perlin-3d :seed "a")
+                :frequency 4
+                :power (/ 16)
+                :roughness 2)
+  (c:make-map :width 256 :height 256 :x-min -5 :x-max 5 :y-min -5 :y-max 5)
+  (c:render-map :gradient 'jade)
+  (c:write-image arg))
+#+END_SRC
+
+#+RESULTS:
+:results:
+[[file:./img/proto/proto-3.png]]
 :end:
 
 Documentation retrival test:
